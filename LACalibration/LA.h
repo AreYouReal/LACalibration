@@ -7,7 +7,6 @@
 #ifndef LA_H
 #define LA_H
 
-#include <iostream>
 #include <cmath>
 
 #define PI atan(1.0f)*4.0f

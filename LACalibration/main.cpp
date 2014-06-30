@@ -30,16 +30,21 @@ int main(int argc, const char * argv[])
     
     Vector3D scaleVector(3.0, 3.0, 3.0);
     Matrix4D translateLAMatrix = LA::translate(scaleVector);
-    
+    translateLAMatrix = LA::transpose(translateLAMatrix);
     print(translateMatrix);
-    
-    
     print(translateLAMatrix);
 
+    Vector3D LAeye(0, 1, 1);
+    Vector3D LAlookAt(-5, 0, 0);
+    Vector3D LAup(0, 1, 0);
+    Matrix4D LAlook = LA::transpose(LA::lookAt(LAeye, LAlookAt, LAup));
     
     
+    glm::mat4 glmmat4 = glm::lookAt(glm::vec3(0, 1, 1), glm::vec3(-5, 0, 0), glm::vec3(0, 1, 0));
     
+    print(LAlook);
 
+    print(glmmat4);
     return 0;
 }
 

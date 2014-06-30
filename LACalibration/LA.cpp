@@ -2,6 +2,9 @@
 
 #include "LA.h"
 
+// For printing stuff - while debugging
+#include <iostream>
+
 // Attention! LA it is a ROW MAJOR linear algebra engine
 
 // Vector3D definition
