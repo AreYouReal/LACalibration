@@ -10,6 +10,7 @@
 		9433EC9D1961C930007770A6 /* LA.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 9433EBB41961C930007770A6 /* LA.cpp */; };
 		9433EC9E1961C930007770A6 /* main.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 9433EBB61961C930007770A6 /* main.cpp */; };
 		9433EC9F1961C930007770A6 /* dummy.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 9433EBBF1961C930007770A6 /* dummy.cpp */; };
+		9465FA71196473EB00E75557 /* TestUtils.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 9465FA70196473EB00E75557 /* TestUtils.cpp */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -254,6 +255,8 @@
 		9433EC991961C930007770A6 /* wrap.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = wrap.hpp; sourceTree = "<group>"; };
 		9433EC9A1961C930007770A6 /* wrap.inl */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = wrap.inl; sourceTree = "<group>"; };
 		9433EC9C1961C930007770A6 /* xstream.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = xstream.hpp; sourceTree = "<group>"; };
+		9465FA6F1964719300E75557 /* TestUtils.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TestUtils.h; sourceTree = "<group>"; };
+		9465FA70196473EB00E75557 /* TestUtils.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = TestUtils.cpp; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -286,6 +289,8 @@
 		9433EBAA1961C530007770A6 /* LACalibration */ = {
 			isa = PBXGroup;
 			children = (
+				9465FA6F1964719300E75557 /* TestUtils.h */,
+				9465FA70196473EB00E75557 /* TestUtils.cpp */,
 				9433EBB41961C930007770A6 /* LA.cpp */,
 				9433EBB51961C930007770A6 /* LA.h */,
 				9433EBB61961C930007770A6 /* main.cpp */,
@@ -612,6 +617,7 @@
 				9433EC9E1961C930007770A6 /* main.cpp in Sources */,
 				9433EC9F1961C930007770A6 /* dummy.cpp in Sources */,
 				9433EC9D1961C930007770A6 /* LA.cpp in Sources */,
+				9465FA71196473EB00E75557 /* TestUtils.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -721,6 +727,7 @@
 				9433EBB31961C530007770A6 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
