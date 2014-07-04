@@ -12,16 +12,18 @@
 #include "glm/ext.hpp"
 #include "LA.h"
 
-#define rnd (float)((float)(rand() % 1000 - 500)/100)
+#define rnd(max) (float)((float)(rand() % max - max/2)/ (MAX/10))
+#define MAX 1000
+
 
 #define SIGMA 0.00001
 
 struct TestUtils{
     static glm::vec3 glmrndvec(){
-        return glm::vec3(rnd, rnd, rnd);
+        return glm::vec3(rnd(MAX), rnd(MAX), rnd(MAX));
     }
     static Vector3D larndvec(){
-        return Vector3D(rnd, rnd, rnd);
+        return Vector3D(rnd(MAX), rnd(MAX), rnd(MAX));
     }
     static Vector3D laVecFromglmVec(glm::vec3 vec){
         return Vector3D(vec.x, vec.y, vec.z);
@@ -49,7 +51,12 @@ struct TestUtils{
         }
         return true;
     }
+
+    
+    static bool testMVPMatrices();
     
     
     static bool lookAtTest(int numTests);
+    static bool perspectiveTest(int numTests);
+    static bool translateTest(int numTests);
 };

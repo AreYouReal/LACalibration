@@ -12,7 +12,12 @@
 
 
 int main(int argc, const char * argv[]){
-    TestUtils::lookAtTest(9000000);
+    
+    TestUtils::translateTest(10000000);
+    
+    //TestUtils::perspectiveTest(100000);
+    
+    //TestUtils::lookAtTest(9000000);
     
     return 0;
 }

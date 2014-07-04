@@ -31,3 +31,40 @@ bool TestUtils::lookAtTest(int numTests){
     printf("LA::loookAt(...) test PASSED on %d / %d tests.   (SIGMA = %f)\n", (numTests - failedTests), numTests, SIGMA);
     return true;
 }
+
+
+bool TestUtils::perspectiveTest(int numTests){
+    int failedTests = 0;
+    for(int i = 0; i < numTests; ++i){
+        float fovy  = rnd(90);
+        float width = rnd(1000);
+        float height= rnd(1000);
+        float near  = rnd(10);
+        float far   = rnd(1000);
+        while(far - near < SIGMA || width / height < SIGMA ){
+            far     = rnd(1000);
+            width   = rnd(1000);
+            height  = rnd(1000);
+        }
+        if(!TestUtils::m4equality(glm::perspective(fovy, width/height, near, far), LA::perspective(fovy, width, height, near, far)))
+            failedTests++;
+    }
+    printf("LA::perspective(...) test PASSED on %d / %d tests.   (SIGMA = %f)\n", (numTests - failedTests), numTests, SIGMA);
+    return true;
+}
+
+
+bool TestUtils::translateTest(int numTests){
+    int failedTests = 0;
+    glm::vec3 glmMove;
+    Vector3D laMove;
+    for(int i = 0; i < numTests; ++i){
+        glmMove = glmrndvec();
+        laMove  = laVecFromglmVec(glmMove);
+        if(!TestUtils::m4equality(glm::translate(glmMove), LA::translate(laMove))){
+            failedTests++;
+        }
+    }
+    printf("LA::translate(...) test PASSED on %d / %d tests.   (SIGMA = %f)\n", (numTests - failedTests), numTests, SIGMA);
+    return true;
+}
