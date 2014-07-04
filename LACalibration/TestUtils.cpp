@@ -8,8 +8,11 @@
 
 #include "TestUtils.h"
 
-
-
+//____________________________________________________________________
+bool TestUtils::testMVPMatrices(int numTests){
+    return (scaleTest(numTests) && rotateTest(numTests) && translateTest(numTests) && inverseTest(numTests) && lookAtTest(numTests) && perspectiveTest(numTests));
+}
+//____________________________________________________________________
 bool TestUtils::lookAtTest(int numTests){
     int failedTests = 0;
     glm::vec3 glmEye , glmCenter, glmUp;
@@ -28,11 +31,10 @@ bool TestUtils::lookAtTest(int numTests){
             failedTests++;
         }
     }
-    printf("LA::loookAt(...) test FINISH on %d / %d tests.   (SIGMA = %f)\n", (numTests - failedTests), numTests, SIGMA);
+    printf("LA::loookAt(...) test FINISHED on %d / %d tests.   (SIGMA = %f)\n", (numTests - failedTests), numTests, SIGMA);
     return true;
 }
-
-
+//____________________________________________________________________
 bool TestUtils::perspectiveTest(int numTests){
     int failedTests = 0;
     for(int i = 0; i < numTests; ++i){
@@ -49,11 +51,10 @@ bool TestUtils::perspectiveTest(int numTests){
         if(!TestUtils::m4equality(glm::perspective(fovy, width/height, near, far), LA::perspective(fovy, width, height, near, far)))
             failedTests++;
     }
-    printf("LA::perspective(...) test FINISH on %d / %d tests.   (SIGMA = %f)\n", (numTests - failedTests), numTests, SIGMA);
+    printf("LA::perspective(...) test FINISHED on %d / %d tests.   (SIGMA = %f)\n", (numTests - failedTests), numTests, SIGMA);
     return true;
 }
-
-
+//____________________________________________________________________
 bool TestUtils::translateTest(int numTests){
     int failedTests = 0;
     glm::vec3 glmMove;
@@ -65,10 +66,10 @@ bool TestUtils::translateTest(int numTests){
             failedTests++;
         }
     }
-    printf("LA::translate(...) test FINISH on %d / %d tests.   (SIGMA = %f)\n", (numTests - failedTests), numTests, SIGMA);
+    printf("LA::translate(...) test FINISHED on %d / %d tests.   (SIGMA = %f)\n", (numTests - failedTests), numTests, SIGMA);
     return true;
 }
-
+//____________________________________________________________________
 bool TestUtils::rotateTest(int numTests){
     int failedTests = 0;
     glm::vec3 glmAxis;
@@ -82,10 +83,10 @@ bool TestUtils::rotateTest(int numTests){
             failedTests++;
         }
     }
-    printf("LA::rotate(...) test FINISH on %d / %d tests.   (SIGMA = %f)\n", (numTests - failedTests), numTests, SIGMA);
+    printf("LA::rotate(...) test FINISHED on %d / %d tests.   (SIGMA = %f)\n", (numTests - failedTests), numTests, SIGMA);
     return true;
 }
-
+//____________________________________________________________________
 bool TestUtils::scaleTest(int numTests){
     int failedTests = 0;
     glm::vec3 glmScale;
@@ -97,10 +98,10 @@ bool TestUtils::scaleTest(int numTests){
             failedTests++;
         }
     }
-    printf("LA::scale(...) test FINISH on %d / %d tests.   (SIGMA = %f)\n", (numTests - failedTests), numTests, SIGMA);
+    printf("LA::scale(...) test FINISHED on %d / %d tests.   (SIGMA = %f)\n", (numTests - failedTests), numTests, SIGMA);
     return true;
 }
-
+//____________________________________________________________________
 bool TestUtils::inverseTest(int numTests){
     int failedTests = 0;
     glm::mat4   glmMat  = glmrndmat4();
@@ -110,6 +111,7 @@ bool TestUtils::inverseTest(int numTests){
             failedTests++;
         }
     }
-    printf("LA::inverse(...) test FINISH on %d / %d tests.   (SIGMA = %f)\n", (numTests - failedTests), numTests, SIGMA);
+    printf("LA::inverse(...) test FINISHED on %d / %d tests.   (SIGMA = %f)\n", (numTests - failedTests), numTests, SIGMA);
     return true;
 }
+//____________________________________________________________________

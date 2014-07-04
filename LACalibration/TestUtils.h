@@ -13,31 +13,29 @@
 #include "LA.h"
 
 #define rnd(max) (float)((float)(rand() % max - max/2)/ (MAX/10))
-#define MAX 1000
+#define MAX 100
 
 
-#define SIGMA 0.00001
+#define SIGMA 0.000001
 
-struct TestUtils{
+class TestUtils{
+private:
+// Supporting functions
     static glm::vec3 glmrndvec(){
         return glm::vec3(rnd(MAX), rnd(MAX), rnd(MAX));
     }
-    
     static glm::mat4 glmrndmat4(){
         return glm::mat4(rnd(MAX), rnd(MAX), rnd(MAX), rnd(MAX),
                          rnd(MAX), rnd(MAX), rnd(MAX), rnd(MAX),
                          rnd(MAX), rnd(MAX), rnd(MAX), rnd(MAX),
                          rnd(MAX), rnd(MAX), rnd(MAX), rnd(MAX) );
     }
-    
     static Vector3D larndvec(){
         return Vector3D(rnd(MAX), rnd(MAX), rnd(MAX));
     }
-    
     static Vector3D laVecFromglmVec(const glm::vec3 vec){
         return Vector3D(vec.x, vec.y, vec.z);
     }
-    
     static Matrix4D laMatrix4FromglmMat4(const glm::mat4 glmm4){
         glm::mat4 m4 = glm::transpose(glmm4);
         return Matrix4D(m4[0][0], m4[0][1], m4[0][2], m4[0][3],
@@ -69,13 +67,15 @@ struct TestUtils{
         return true;
     }
 
-    
-    static bool testMVPMatrices();
-    
-    static bool lookAtTest(int numTests);
-    static bool perspectiveTest(int numTests);
-    static bool translateTest(int numTests);
-    static bool rotateTest(int numTests);
-    static bool scaleTest(int numTests);
-    static bool inverseTest(int numTests);
+// Matrix4D related tests
+    static bool lookAtTest      (int numTests);
+    static bool perspectiveTest (int numTests);
+    static bool translateTest   (int numTests);
+    static bool rotateTest      (int numTests);
+    static bool scaleTest       (int numTests);
+    static bool inverseTest     (int numTests);
+
+public:
+    static bool testMVPMatrices (int numTests);
+
 };

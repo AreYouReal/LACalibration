@@ -5,7 +5,7 @@
 // For printing stuff - while debugging
 #include <iostream>
 
-// Attention! LA it is a ROW MAJOR linear algebra engine
+// Attention! LA it is a ROW MAJOR linear algebra library
 
 // Vector3D definition
 Vector3D::Vector3D()

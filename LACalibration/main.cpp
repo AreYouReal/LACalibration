@@ -13,14 +13,7 @@
 
 int main(int argc, const char * argv[]){
     
-    //TestUtils::scaleTest(10000000);
-    
-    //TestUtils::perspectiveTest(100000);
-    
-    //TestUtils::lookAtTest(9000000);
-    
-    TestUtils::inverseTest(10000000);
-    
+    TestUtils::testMVPMatrices(100000);
     
     return 0;
 }
