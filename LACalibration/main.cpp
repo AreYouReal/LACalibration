@@ -13,7 +13,7 @@
 
 int main(int argc, const char * argv[]){
     
-    TestUtils::translateTest(10000000);
+    TestUtils::scaleTest(10000000);
     
     //TestUtils::perspectiveTest(100000);
     

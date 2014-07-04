@@ -68,3 +68,35 @@ bool TestUtils::translateTest(int numTests){
     printf("LA::translate(...) test PASSED on %d / %d tests.   (SIGMA = %f)\n", (numTests - failedTests), numTests, SIGMA);
     return true;
 }
+
+bool TestUtils::rotateTest(int numTests){
+    int failedTests = 0;
+    glm::vec3 glmAxis;
+    Vector3D laAxis;
+    float angle;
+    for(int i = 0; i < numTests; ++i){
+        glmAxis = glmrndvec();
+        laAxis  = laVecFromglmVec(glmAxis);
+        angle = rnd(1000);
+        if(!TestUtils::m4equality(glm::rotate(angle, glmAxis), LA::rotate(angle, laAxis))){
+            failedTests++;
+        }
+    }
+    printf("LA::rotate(...) test PASSED on %d / %d tests.   (SIGMA = %f)\n", (numTests - failedTests), numTests, SIGMA);
+    return true;
+}
+
+bool TestUtils::scaleTest(int numTests){
+    int failedTests = 0;
+    glm::vec3 glmScale;
+    Vector3D laScale;
+    for(int i = 0; i < numTests; ++i){
+        glmScale = glmrndvec();
+        laScale  = laVecFromglmVec(glmScale);
+        if(!TestUtils::m4equality(glm::scale(glmScale), LA::scale(laScale))){
+            failedTests++;
+        }
+    }
+    printf("LA::scale(...) test PASSED on %d / %d tests.   (SIGMA = %f)\n", (numTests - failedTests), numTests, SIGMA);
+    return true;
+}

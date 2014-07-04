@@ -59,4 +59,6 @@ struct TestUtils{
     static bool lookAtTest(int numTests);
     static bool perspectiveTest(int numTests);
     static bool translateTest(int numTests);
+    static bool rotateTest(int numTests);
+    static bool scaleTest(int numTests);
 };
