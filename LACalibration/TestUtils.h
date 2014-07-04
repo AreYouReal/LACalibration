@@ -22,11 +22,28 @@ struct TestUtils{
     static glm::vec3 glmrndvec(){
         return glm::vec3(rnd(MAX), rnd(MAX), rnd(MAX));
     }
+    
+    static glm::mat4 glmrndmat4(){
+        return glm::mat4(rnd(MAX), rnd(MAX), rnd(MAX), rnd(MAX),
+                         rnd(MAX), rnd(MAX), rnd(MAX), rnd(MAX),
+                         rnd(MAX), rnd(MAX), rnd(MAX), rnd(MAX),
+                         rnd(MAX), rnd(MAX), rnd(MAX), rnd(MAX) );
+    }
+    
     static Vector3D larndvec(){
         return Vector3D(rnd(MAX), rnd(MAX), rnd(MAX));
     }
-    static Vector3D laVecFromglmVec(glm::vec3 vec){
+    
+    static Vector3D laVecFromglmVec(const glm::vec3 vec){
         return Vector3D(vec.x, vec.y, vec.z);
+    }
+    
+    static Matrix4D laMatrix4FromglmMat4(const glm::mat4 glmm4){
+        glm::mat4 m4 = glm::transpose(glmm4);
+        return Matrix4D(m4[0][0], m4[0][1], m4[0][2], m4[0][3],
+                        m4[1][0], m4[1][1], m4[1][2], m4[1][3],
+                        m4[2][0], m4[2][1], m4[2][2], m4[2][3],
+                        m4[3][0], m4[3][1], m4[3][2], m4[3][3]);
     }
     static void print(const glm::vec3 vec){
         std::cout << vec.x << " " << vec.y << " " << vec.z << std::endl;
@@ -55,10 +72,10 @@ struct TestUtils{
     
     static bool testMVPMatrices();
     
-    
     static bool lookAtTest(int numTests);
     static bool perspectiveTest(int numTests);
     static bool translateTest(int numTests);
     static bool rotateTest(int numTests);
     static bool scaleTest(int numTests);
+    static bool inverseTest(int numTests);
 };
