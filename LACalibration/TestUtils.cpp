@@ -28,7 +28,7 @@ bool TestUtils::lookAtTest(int numTests){
             failedTests++;
         }
     }
-    printf("LA::loookAt(...) test PASSED on %d / %d tests.   (SIGMA = %f)\n", (numTests - failedTests), numTests, SIGMA);
+    printf("LA::loookAt(...) test FINISH on %d / %d tests.   (SIGMA = %f)\n", (numTests - failedTests), numTests, SIGMA);
     return true;
 }
 
@@ -49,7 +49,7 @@ bool TestUtils::perspectiveTest(int numTests){
         if(!TestUtils::m4equality(glm::perspective(fovy, width/height, near, far), LA::perspective(fovy, width, height, near, far)))
             failedTests++;
     }
-    printf("LA::perspective(...) test PASSED on %d / %d tests.   (SIGMA = %f)\n", (numTests - failedTests), numTests, SIGMA);
+    printf("LA::perspective(...) test FINISH on %d / %d tests.   (SIGMA = %f)\n", (numTests - failedTests), numTests, SIGMA);
     return true;
 }
 
@@ -65,7 +65,7 @@ bool TestUtils::translateTest(int numTests){
             failedTests++;
         }
     }
-    printf("LA::translate(...) test PASSED on %d / %d tests.   (SIGMA = %f)\n", (numTests - failedTests), numTests, SIGMA);
+    printf("LA::translate(...) test FINISH on %d / %d tests.   (SIGMA = %f)\n", (numTests - failedTests), numTests, SIGMA);
     return true;
 }
 
@@ -82,7 +82,7 @@ bool TestUtils::rotateTest(int numTests){
             failedTests++;
         }
     }
-    printf("LA::rotate(...) test PASSED on %d / %d tests.   (SIGMA = %f)\n", (numTests - failedTests), numTests, SIGMA);
+    printf("LA::rotate(...) test FINISH on %d / %d tests.   (SIGMA = %f)\n", (numTests - failedTests), numTests, SIGMA);
     return true;
 }
 
@@ -97,6 +97,19 @@ bool TestUtils::scaleTest(int numTests){
             failedTests++;
         }
     }
-    printf("LA::scale(...) test PASSED on %d / %d tests.   (SIGMA = %f)\n", (numTests - failedTests), numTests, SIGMA);
+    printf("LA::scale(...) test FINISH on %d / %d tests.   (SIGMA = %f)\n", (numTests - failedTests), numTests, SIGMA);
+    return true;
+}
+
+bool TestUtils::inverseTest(int numTests){
+    int failedTests = 0;
+    glm::mat4   glmMat  = glmrndmat4();
+    Matrix4D    laMat   = laMatrix4FromglmMat4(glmMat);
+    for(int i = 0; i < numTests; ++i){
+        if(!TestUtils::m4equality(glm::inverse(glmMat), LA::inverse(laMat))){
+            failedTests++;
+        }
+    }
+    printf("LA::inverse(...) test FINISH on %d / %d tests.   (SIGMA = %f)\n", (numTests - failedTests), numTests, SIGMA);
     return true;
 }

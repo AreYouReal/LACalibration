@@ -19,15 +19,9 @@ int main(int argc, const char * argv[]){
     
     //TestUtils::lookAtTest(9000000);
     
-    for(int i = 0; i < 1000; i++){
-        glm::mat4 glmMat4 = TestUtils::glmrndmat4();
-        if(!TestUtils::m4equality(glmMat4, TestUtils::laMatrix4FromglmMat4(glmMat4))){
-            printf("Generating equal matrices test FAILED!");
-            return 0;
-        }
-    }
+    TestUtils::inverseTest(10000000);
     
-    printf("Generating equal matrices test PASSED!");
+    
     return 0;
 }
 
