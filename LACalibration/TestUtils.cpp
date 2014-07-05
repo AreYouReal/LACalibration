@@ -10,7 +10,7 @@
 
 #pragma mark M4D tests
 //____________________________________________________________________
-bool TestUtils::testMVPMatrices(int numTests){
+bool TestUtils::testM4Dfunctionality(int numTests){
     return (scaleTest(numTests) && rotateTest(numTests) && translateTest(numTests) && inverseTest(numTests) && lookAtTest(numTests) && perspectiveTest(numTests));
 }
 //____________________________________________________________________
@@ -22,6 +22,13 @@ bool TestUtils::lookAtTest(int numTests){
         glmEye       = glmrndvec();
         glmCenter    = glmrndvec();
         glmUp        = glmrndvec();
+        while(glmCenter.x == glmEye.x && glmCenter.y == glmEye.y && glmCenter.z == glmEye.z){
+            glmEye   = glmrndvec();
+            glmCenter= glmrndvec();
+        }
+        while(glmUp.x == 0 && glmUp.y == 0 && glmUp.z == 0) {
+            glmUp       = glmrndvec();
+        }
         
         laEye      = laVecFromglmVec(glmEye);
         laCenter   = laVecFromglmVec(glmCenter);
@@ -78,6 +85,8 @@ bool TestUtils::rotateTest(int numTests){
     float angle;
     for(int i = 0; i < numTests; ++i){
         glmAxis = glmrndvec();
+        while(glmAxis.x == 0 && glmAxis.y == 0 && glmAxis.z == 0)
+            glmAxis = glmrndvec();
         laAxis  = laVecFromglmVec(glmAxis);
         angle = rnd(1000);
         if(!TestUtils::m4equality(glm::rotate(angle, glmAxis), LA::rotate(angle, laAxis))){
@@ -118,6 +127,10 @@ bool TestUtils::inverseTest(int numTests){
 //____________________________________________________________________
 #pragma mark V3D tests
 //____________________________________________________________________
+bool TestUtils::testV3Dfunctionality(int numTests){
+    return (normalizeTest(numTests) && lengthTest(numTests) && dotProductTest(numTests) &&crossProductTest(numTests));
+}
+//____________________________________________________________________
 bool TestUtils::normalizeTest(int numTests){
     int failedTests = 0;
     glm::vec3   glmVec;
@@ -132,11 +145,65 @@ bool TestUtils::normalizeTest(int numTests){
         laVec   = LA::normalize(laVec);
         
         if(!TestUtils::v3equality(glmVec, laVec)){
-            printf("\n[ %f, %f, %f ]   not equal to [ %f, %f, %f ]", glmVec.x, glmVec.y, glmVec.z, laVec[0], laVec[1], laVec[2]);
             failedTests++;
         }
     }
     printf("LA::normalize(...) test FINISHED on %d / %d tests.   (SIGMA = %f)\n", (numTests - failedTests), numTests, SIGMA);
+    return true;
+}
+//____________________________________________________________________
+bool TestUtils::lengthTest(int numTests){
+    int failedTests = 0;
+    glm::vec3   glmVec;
+    V3D         laVec;
+    for(int i = 0; i < numTests; ++i){
+        glmVec  = glmrndvec();
+        while(glmVec.x == 0 && glmVec.y == 0 && glmVec.z == 0)
+            glmVec = glmrndvec();
+        
+        laVec   = laVecFromglmVec(glmVec);
+        if(!(glm::length(glmVec) - LA::length(laVec) < SIGMA)){
+            failedTests++;
+        }
+        
+    }
+    printf("LA::length(...) test FINISHED on %d / %d tests.   (SIGMA = %f)\n", (numTests - failedTests), numTests, SIGMA);
+    return true;
+}
+//____________________________________________________________________
+bool TestUtils::dotProductTest(int numTests){
+    int failedTests = 0;
+    glm::vec3   glmVec_1, glmVec_2;
+    V3D         laVec_1, laVec_2;
+    for(int i = 0; i < numTests; ++i){
+        glmVec_1 = glmrndvec();
+        glmVec_2 = glmrndvec();
+        laVec_1  = laVecFromglmVec(glmVec_1);
+        laVec_2  = laVecFromglmVec(glmVec_2);
+        
+        if(!(glm::dot(glmVec_1, glmVec_2) - LA::dot(laVec_1, laVec_2) < SIGMA)){
+            failedTests++;
+        }
+    }
+    printf("LA::dot(...) test FINISHED on %d / %d tests.   (SIGMA = %f)\n", (numTests - failedTests), numTests, SIGMA);
+    return true;
+}
+//____________________________________________________________________
+bool TestUtils::crossProductTest(int numTests){
+    int failedTests = 0;
+    glm::vec3   glmVec_1, glmVec_2;
+    V3D         laVec_1, laVec_2;
+    for(int i = 0; i < numTests; ++i){
+        glmVec_1 = glmrndvec();
+        glmVec_2 = glmrndvec();
+        laVec_1  = laVecFromglmVec(glmVec_1);
+        laVec_2  = laVecFromglmVec(glmVec_2);
+        
+        if(!(v3equality(glm::cross(glmVec_1, glmVec_2), LA::cross(laVec_1, laVec_2)))){
+            failedTests++;
+        }
+    }
+    printf("LA::cross(...) test FINISHED on %d / %d tests.   (SIGMA = %f)\n", (numTests - failedTests), numTests, SIGMA);
     return true;
 }
 //____________________________________________________________________

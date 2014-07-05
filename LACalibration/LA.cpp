@@ -336,3 +336,7 @@ float* LA::getPointer(M4D &mat){
 	return &(mat.m[0][0]);
 }
 
+float* LA::getPointer(V3D &vec){
+	return vec.v;
+}
+

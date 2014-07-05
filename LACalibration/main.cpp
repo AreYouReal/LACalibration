@@ -10,10 +10,11 @@
 #include "LA.h"
 #include <iostream>
 
-
 int main(int argc, const char * argv[]){
+
+    TestUtils::testM4Dfunctionality(NUM_TESTS);
     
-    TestUtils::normalizeTest(1000000);
+    TestUtils::testV3Dfunctionality(NUM_TESTS);
     
     return 0;
 }

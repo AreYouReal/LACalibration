@@ -95,6 +95,7 @@ public:
 	static M4D translate(float x, float y, float z);
 	static M4D translate(V3D& translate);
 	static float* getPointer(M4D& mat);
+    static float* getPointer(V3D& vec);
 };
 
 

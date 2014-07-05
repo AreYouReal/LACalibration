@@ -15,8 +15,9 @@
 #define rnd(max) (float)((float)(rand() % max - max/2)/ (MAX/10))
 #define MAX 100
 
-
 #define SIGMA 0.0000001
+
+#define NUM_TESTS 1000000
 
 class TestUtils{
 #warning declare private after debugging and testing
@@ -86,9 +87,12 @@ public:
     static bool inverseTest     (int numTests);
 
 // V3D related tests
-    static bool normalizeTest(int numTests);
+    static bool normalizeTest   (int numTests);
+    static bool lengthTest      (int numTests);
+    static bool dotProductTest  (int numTests);
+    static bool crossProductTest(int numTests);
     
 public:
-    static bool testMVPMatrices (int numTests);
-
+    static bool testV3Dfunctionality(int numTests);
+    static bool testM4Dfunctionality(int numTests);
 };
