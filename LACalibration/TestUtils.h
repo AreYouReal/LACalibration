@@ -16,7 +16,7 @@
 #define MAX 100
 
 
-#define SIGMA 0.000001
+#define SIGMA 0.0000001
 
 class TestUtils{
 #warning declare private after debugging and testing
@@ -69,7 +69,9 @@ public:
     }
     
     static bool v3equality(const glm::vec3 glmVec, const V3D laVec){
-        bool equal = glmVec[0] == laVec.v[0] && glmVec[1] && laVec.v[1] && glmVec[2] && laVec.v[2];
+        bool equal = (   glmVec[0] - laVec.v[0] < SIGMA
+                      && glmVec[1] - laVec.v[1] < SIGMA
+                      && glmVec[2] - laVec.v[2] < SIGMA );
         if(!equal)
             printf("v3equality failed");
         return equal;
@@ -84,6 +86,7 @@ public:
     static bool inverseTest     (int numTests);
 
 // V3D related tests
+    static bool normalizeTest(int numTests);
     
 public:
     static bool testMVPMatrices (int numTests);

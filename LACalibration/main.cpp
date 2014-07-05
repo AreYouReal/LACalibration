@@ -13,8 +13,7 @@
 
 int main(int argc, const char * argv[]){
     
-    TestUtils::testMVPMatrices(100000);
-    
+    TestUtils::normalizeTest(1000000);
     
     return 0;
 }

@@ -8,6 +8,7 @@
 
 #include "TestUtils.h"
 
+#pragma mark M4D tests
 //____________________________________________________________________
 bool TestUtils::testMVPMatrices(int numTests){
     return (scaleTest(numTests) && rotateTest(numTests) && translateTest(numTests) && inverseTest(numTests) && lookAtTest(numTests) && perspectiveTest(numTests));
@@ -112,6 +113,30 @@ bool TestUtils::inverseTest(int numTests){
         }
     }
     printf("LA::inverse(...) test FINISHED on %d / %d tests.   (SIGMA = %f)\n", (numTests - failedTests), numTests, SIGMA);
+    return true;
+}
+//____________________________________________________________________
+#pragma mark V3D tests
+//____________________________________________________________________
+bool TestUtils::normalizeTest(int numTests){
+    int failedTests = 0;
+    glm::vec3   glmVec;
+    V3D         laVec;
+    for(int i = 0; i < numTests; ++i){
+        glmVec  = glmrndvec();
+        while(glmVec.x == 0 || glmVec.y == 0 || glmVec.z == 0)
+            glmVec = glmrndvec();
+        
+        laVec   = laVecFromglmVec(glmVec);
+        glmVec  = glm::normalize(glmVec);
+        laVec   = LA::normalize(laVec);
+        
+        if(!TestUtils::v3equality(glmVec, laVec)){
+            printf("\n[ %f, %f, %f ]   not equal to [ %f, %f, %f ]", glmVec.x, glmVec.y, glmVec.z, laVec[0], laVec[1], laVec[2]);
+            failedTests++;
+        }
+    }
+    printf("LA::normalize(...) test FINISHED on %d / %d tests.   (SIGMA = %f)\n", (numTests - failedTests), numTests, SIGMA);
     return true;
 }
 //____________________________________________________________________
