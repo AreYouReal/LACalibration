@@ -16,7 +16,7 @@ bool TestUtils::testMVPMatrices(int numTests){
 bool TestUtils::lookAtTest(int numTests){
     int failedTests = 0;
     glm::vec3 glmEye , glmCenter, glmUp;
-    Vector3D laEye, laCenter, laUp;
+    V3D laEye, laCenter, laUp;
     for(int i = 0; i < numTests; ++i){
         glmEye       = glmrndvec();
         glmCenter    = glmrndvec();
@@ -58,7 +58,7 @@ bool TestUtils::perspectiveTest(int numTests){
 bool TestUtils::translateTest(int numTests){
     int failedTests = 0;
     glm::vec3 glmMove;
-    Vector3D laMove;
+    V3D laMove;
     for(int i = 0; i < numTests; ++i){
         glmMove = glmrndvec();
         laMove  = laVecFromglmVec(glmMove);
@@ -73,7 +73,7 @@ bool TestUtils::translateTest(int numTests){
 bool TestUtils::rotateTest(int numTests){
     int failedTests = 0;
     glm::vec3 glmAxis;
-    Vector3D laAxis;
+    V3D laAxis;
     float angle;
     for(int i = 0; i < numTests; ++i){
         glmAxis = glmrndvec();
@@ -90,7 +90,7 @@ bool TestUtils::rotateTest(int numTests){
 bool TestUtils::scaleTest(int numTests){
     int failedTests = 0;
     glm::vec3 glmScale;
-    Vector3D laScale;
+    V3D laScale;
     for(int i = 0; i < numTests; ++i){
         glmScale = glmrndvec();
         laScale  = laVecFromglmVec(glmScale);
@@ -105,7 +105,7 @@ bool TestUtils::scaleTest(int numTests){
 bool TestUtils::inverseTest(int numTests){
     int failedTests = 0;
     glm::mat4   glmMat  = glmrndmat4();
-    Matrix4D    laMat   = laMatrix4FromglmMat4(glmMat);
+    M4D    laMat   = laMatrix4FromglmMat4(glmMat);
     for(int i = 0; i < numTests; ++i){
         if(!TestUtils::m4equality(glm::inverse(glmMat), LA::inverse(laMat))){
             failedTests++;

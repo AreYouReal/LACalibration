@@ -19,7 +19,8 @@
 #define SIGMA 0.000001
 
 class TestUtils{
-private:
+#warning declare private after debugging and testing
+public:
 // Supporting functions
     static glm::vec3 glmrndvec(){
         return glm::vec3(rnd(MAX), rnd(MAX), rnd(MAX));
@@ -30,15 +31,15 @@ private:
                          rnd(MAX), rnd(MAX), rnd(MAX), rnd(MAX),
                          rnd(MAX), rnd(MAX), rnd(MAX), rnd(MAX) );
     }
-    static Vector3D larndvec(){
-        return Vector3D(rnd(MAX), rnd(MAX), rnd(MAX));
+    static V3D larndvec(){
+        return V3D(rnd(MAX), rnd(MAX), rnd(MAX));
     }
-    static Vector3D laVecFromglmVec(const glm::vec3 vec){
-        return Vector3D(vec.x, vec.y, vec.z);
+    static V3D laVecFromglmVec(const glm::vec3 vec){
+        return V3D(vec.x, vec.y, vec.z);
     }
-    static Matrix4D laMatrix4FromglmMat4(const glm::mat4 glmm4){
+    static M4D laMatrix4FromglmMat4(const glm::mat4 glmm4){
         glm::mat4 m4 = glm::transpose(glmm4);
-        return Matrix4D(m4[0][0], m4[0][1], m4[0][2], m4[0][3],
+        return M4D(m4[0][0], m4[0][1], m4[0][2], m4[0][3],
                         m4[1][0], m4[1][1], m4[1][2], m4[1][3],
                         m4[2][0], m4[2][1], m4[2][2], m4[2][3],
                         m4[3][0], m4[3][1], m4[3][2], m4[3][3]);
@@ -54,8 +55,8 @@ private:
             std::cout << std::endl;
         }
     }
-    static bool m4equality(const glm::mat4 glmM, const Matrix4D origLAM){
-        Matrix4D laM = LA::transpose(origLAM);
+    static bool m4equality(const glm::mat4 glmM, const M4D origLAM){
+        M4D laM = LA::transpose(origLAM);
         for(int i = 0; i < glmM.length(); ++i){
             for(int j = 0; j < glmM[i].length(); ++j){
                 if(glmM[i][j] - laM.m[i][j] > SIGMA){
@@ -66,8 +67,15 @@ private:
         }
         return true;
     }
+    
+    static bool v3equality(const glm::vec3 glmVec, const V3D laVec){
+        bool equal = glmVec[0] == laVec.v[0] && glmVec[1] && laVec.v[1] && glmVec[2] && laVec.v[2];
+        if(!equal)
+            printf("v3equality failed");
+        return equal;
+    };
 
-// Matrix4D related tests
+// M4D related tests
     static bool lookAtTest      (int numTests);
     static bool perspectiveTest (int numTests);
     static bool translateTest   (int numTests);
@@ -75,6 +83,8 @@ private:
     static bool scaleTest       (int numTests);
     static bool inverseTest     (int numTests);
 
+// V3D related tests
+    
 public:
     static bool testMVPMatrices (int numTests);
 
