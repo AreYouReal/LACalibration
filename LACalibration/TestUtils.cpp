@@ -11,7 +11,7 @@
 #pragma mark M4D tests
 //____________________________________________________________________
 bool TestUtils::testM4Dfunctionality(int numTests){
-    return (scaleTest(numTests) && rotateTest(numTests) && translateTest(numTests) && inverseTest(numTests) && lookAtTest(numTests) && perspectiveTest(numTests));
+    return (scaleTest(numTests) && rotateTest(numTests) && translateTest(numTests) && inverseTest(numTests) && lookAtTest(numTests) && orthoTest(numTests) && perspectiveTest(numTests));
 }
 //____________________________________________________________________
 bool TestUtils::lookAtTest(int numTests){
@@ -40,6 +40,29 @@ bool TestUtils::lookAtTest(int numTests){
         }
     }
     printf("LA::loookAt(...) test FINISHED on %d / %d tests.   (SIGMA = %f)\n", (numTests - failedTests), numTests, SIGMA);
+    return true;
+}
+//____________________________________________________________________
+bool TestUtils::orthoTest(int numTests){
+    int failedTests = 0;
+    for(int i = 0; i < numTests; ++i){
+        float left   = rnd(1000);
+        float right  = rnd(1000);
+        float top    = rnd(1000);
+        float bottom = rnd(1000);
+        float near   = rnd(10);
+        float far    = rnd(1000);
+        while(far - near < SIGMA || right - left < SIGMA || top - bottom < SIGMA){
+            far     = rnd(1000);
+            right   = rnd(1000);
+            left    = rnd(1000);
+            top     = rnd(1000);
+            bottom  = rnd(1000);
+        }
+        if(!TestUtils::m4equality(glm::ortho(left, right, top, bottom, near, far), LA::ortho(left, right, top, bottom, near, far)))
+            failedTests++;
+    }
+    printf("LA::ortho(...) test FINISHED on %d / %d tests.   (SIGMA = %f)\n", (numTests - failedTests), numTests, SIGMA);
     return true;
 }
 //____________________________________________________________________

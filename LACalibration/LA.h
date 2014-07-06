@@ -87,6 +87,7 @@ public:
 	static M4D inverseTranspose(const M4D& m4);
 	static M4D lookAt(float eyeX, float eyeY, float eyeZ, float lookAtX, float lookAtY, float lookAtZ, float upX, float upY, float upZ);
 	static M4D lookAt(V3D& eye, V3D& lookAt, V3D& up);
+    static M4D ortho(float l, float r, float t, float b, float n, float f);
 	static M4D perspective(float fovy, float w, float h, float n, float f);
 	static M4D rotate(float angle, float x, float y, float z);
 	static M4D rotate(float angle, V3D& axis);

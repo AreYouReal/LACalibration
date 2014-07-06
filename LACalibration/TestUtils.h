@@ -15,7 +15,7 @@
 #define rnd(max) (float)((float)(rand() % max - max/2)/ (MAX/10))
 #define MAX 100
 
-#define SIGMA 0.0000001
+#define SIGMA 0.000001
 
 #define NUM_TESTS 1000000
 
@@ -61,7 +61,7 @@ public:
         for(int i = 0; i < glmM.length(); ++i){
             for(int j = 0; j < glmM[i].length(); ++j){
                 if(glmM[i][j] - laM.m[i][j] > SIGMA){
-                    //printf("\n%f != %f\n", glmM[i][j], laM.m[i][j]);
+                    //printf("\n%f != %f        [%d][%d]\n", glmM[i][j], laM.m[i][j], i, j);
                     return false;
                 }
             }
@@ -80,6 +80,7 @@ public:
 
 // M4D related tests
     static bool lookAtTest      (int numTests);
+    static bool orthoTest       (int numTests);
     static bool perspectiveTest (int numTests);
     static bool translateTest   (int numTests);
     static bool rotateTest      (int numTests);

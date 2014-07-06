@@ -274,6 +274,18 @@ M4D LA::lookAt(V3D& eye, V3D& lookAt, V3D& up){
 	rMat4.m[2][3] = dot(w, -eye);
 	return rMat4;
 }
+
+M4D LA::ortho(float l, float r, float t, float b, float n, float f){
+    float w = r - l;
+    float h = t - b;
+    float d = f - n;
+    M4D rMat4( 2/w,   0,      0,        -(r + l)/w,
+                0,    2/h,    0,        (t + b)/h,
+                0,      0,   -2/d,      -(f + n)/d,
+                0,      0,        0,         1);
+    return rMat4;
+}
+
 M4D LA::perspective(float fovy, float w, float h, float n, float f){
 	float aspect = w / h;
 	float A = - (f + n)/(f - n);
