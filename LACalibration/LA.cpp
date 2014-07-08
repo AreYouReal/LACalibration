@@ -165,6 +165,15 @@ M4D operator+(const M4D& m1, const M4D& m2){
 	}
 	return rMat4;
 }
+M4D operator-(const M4D& m1, const M4D& m2){
+	M4D rMat4;
+	for(int i = 0; i < 4; i++){
+		for(int j = 0; j < 4; j++){
+			rMat4.m[i][j] = m1.m[i][j] - m2.m[i][j];
+		}
+	}
+	return rMat4;
+}
 
 V4D operator*(const M4D& m, V4D& vec){
 	V4D rVec4;

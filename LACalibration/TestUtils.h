@@ -90,6 +90,9 @@ public:
     static bool rotateTest      (int numTests);
     static bool scaleTest       (int numTests);
     static bool inverseTest     (int numTests);
+    static bool M4DmultTest     (int numTests);
+    static bool M4DaddTest      (int numTests);
+    static bool M4DsubTest      (int numTests);
 
 // V3D related tests
     static bool normalizeTest   (int numTests);

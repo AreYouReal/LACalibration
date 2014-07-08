@@ -11,7 +11,8 @@
 #pragma mark M4D tests
 //____________________________________________________________________
 bool TestUtils::testM4Dfunctionality(int numTests){
-    return (scaleTest(numTests) && rotateTest(numTests) && translateTest(numTests) && inverseTest(numTests) && lookAtTest(numTests) && orthoTest(numTests) && perspectiveTest(numTests));
+    printf("M4D tests: \n");
+    return (scaleTest(numTests) && rotateTest(numTests) && translateTest(numTests) && inverseTest(numTests) && lookAtTest(numTests) && orthoTest(numTests) && perspectiveTest(numTests) && M4DaddTest(numTests) && M4DsubTest(numTests) && M4DmultTest(numTests));
 }
 //____________________________________________________________________
 bool TestUtils::lookAtTest(int numTests){
@@ -148,9 +149,58 @@ bool TestUtils::inverseTest(int numTests){
     return true;
 }
 //____________________________________________________________________
+bool TestUtils::M4DmultTest(int numTests){
+    int failedTests = 0;
+    glm::mat4   glmM_1  = glmrndmat4();
+    glm::mat4   glmM_2  = glmrndmat4();
+    M4D         laM_1   = laMatrix4FromglmMat4(glmM_1);
+    M4D         laM_2   = laMatrix4FromglmMat4(glmM_2);
+    
+    for(int i = 0; i < numTests; ++i){
+        if(!TestUtils::m4equality(glmM_1 * glmM_2, laM_1 * laM_2)){
+            failedTests++;
+        }
+    }
+    printf("LA::M4Dmulti(...) test FINISHED. %.2f percent matching.   (NUM_TESTS = %d)(SIGMA = %f)\n", (float)(numTests - failedTests) / numTests * 100, numTests, SIGMA);
+    return true;
+}
+//____________________________________________________________________
+bool TestUtils::M4DaddTest(int numTests){
+    int failedTests = 0;
+    glm::mat4   glmM_1  = glmrndmat4();
+    glm::mat4   glmM_2  = glmrndmat4();
+    M4D         laM_1   = laMatrix4FromglmMat4(glmM_1);
+    M4D         laM_2   = laMatrix4FromglmMat4(glmM_2);
+    
+    for(int i = 0; i < numTests; ++i){
+        if(!TestUtils::m4equality(glmM_1 + glmM_2, laM_1 + laM_2)){
+            failedTests++;
+        }
+    }
+    printf("LA::M4Dadd(...) test FINISHED. %.2f percent matching.   (NUM_TESTS = %d)(SIGMA = %f)\n", (float)(numTests - failedTests) / numTests * 100, numTests, SIGMA);
+    return true;
+}
+//____________________________________________________________________
+bool TestUtils::M4DsubTest(int numTests){
+    int failedTests = 0;
+    glm::mat4   glmM_1  = glmrndmat4();
+    glm::mat4   glmM_2  = glmrndmat4();
+    M4D         laM_1   = laMatrix4FromglmMat4(glmM_1);
+    M4D         laM_2   = laMatrix4FromglmMat4(glmM_2);
+    
+    for(int i = 0; i < numTests; ++i){
+        if(!TestUtils::m4equality(glmM_1 - glmM_2, laM_1 - laM_2)){
+            failedTests++;
+        }
+    }
+    printf("LA::M4Dsub(...) test FINISHED. %.2f percent matching.   (NUM_TESTS = %d)(SIGMA = %f)\n", (float)(numTests - failedTests) / numTests * 100, numTests, SIGMA);
+    return true;
+}
+//____________________________________________________________________
 #pragma mark V3D tests
 //____________________________________________________________________
 bool TestUtils::testV3Dfunctionality(int numTests){
+    printf("V3D tests: \n");
     return (normalizeTest(numTests) && lengthTest(numTests) && dotProductTest(numTests) &&crossProductTest(numTests));
 }
 //____________________________________________________________________

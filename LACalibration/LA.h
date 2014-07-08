@@ -68,6 +68,8 @@ M4D operator*(const float scalar, const M4D& m4);
 M4D operator*(const M4D& m4, const float scalar);
 M4D operator/(const M4D& m4, const float scalar);
 M4D operator+(const M4D& m1, const M4D& m2);
+M4D operator-(const M4D& m1, const M4D& m2);
+
 
 V4D operator*(const M4D& m, V4D& vec);
 
