@@ -19,6 +19,8 @@
 
 #define NUM_TESTS 1000000
 
+#define DEBUG_MODE false
+
 class TestUtils{
 #warning declare private after debugging and testing
 public:
@@ -61,7 +63,8 @@ public:
         for(int i = 0; i < glmM.length(); ++i){
             for(int j = 0; j < glmM[i].length(); ++j){
                 if(glmM[i][j] - laM.m[i][j] > SIGMA){
-                    //printf("\n%f != %f        [%d][%d]\n", glmM[i][j], laM.m[i][j], i, j);
+                    if(DEBUG_MODE)
+                        printf("\n%f != %f        [%d][%d]\n", glmM[i][j], laM.m[i][j], i, j);
                     return false;
                 }
             }
@@ -73,8 +76,9 @@ public:
         bool equal = (   glmVec[0] - laVec.v[0] < SIGMA
                       && glmVec[1] - laVec.v[1] < SIGMA
                       && glmVec[2] - laVec.v[2] < SIGMA );
-        if(!equal)
-            printf("v3equality failed");
+        if(!equal && DEBUG_MODE){
+            printf("v3equality failed [ %f, %f, %f ] & [ %f, %f, %f ]", glmVec[0], glmVec[1], glmVec[2], laVec.v[0], laVec.v[1], laVec.v[2]);
+        }
         return equal;
     };
 

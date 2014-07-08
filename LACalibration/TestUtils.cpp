@@ -39,7 +39,7 @@ bool TestUtils::lookAtTest(int numTests){
             failedTests++;
         }
     }
-    printf("LA::loookAt(...) test FINISHED on %d / %d tests.   (SIGMA = %f)\n", (numTests - failedTests), numTests, SIGMA);
+    printf("LA::loookAt(...) test FINISHED. %.2f percent matching.   (NUM_TESTS = %d)(SIGMA = %f)\n", (float)(numTests - failedTests) / numTests * 100, numTests, SIGMA);
     return true;
 }
 //____________________________________________________________________
@@ -62,7 +62,7 @@ bool TestUtils::orthoTest(int numTests){
         if(!TestUtils::m4equality(glm::ortho(left, right, top, bottom, near, far), LA::ortho(left, right, top, bottom, near, far)))
             failedTests++;
     }
-    printf("LA::ortho(...) test FINISHED on %d / %d tests.   (SIGMA = %f)\n", (numTests - failedTests), numTests, SIGMA);
+    printf("LA::ortho(...) test FINISHED. %.2f percent matching.   (NUM_TESTS = %d)(SIGMA = %f)\n", (float)(numTests - failedTests) / numTests * 100, numTests, SIGMA);
     return true;
 }
 //____________________________________________________________________
@@ -82,7 +82,7 @@ bool TestUtils::perspectiveTest(int numTests){
         if(!TestUtils::m4equality(glm::perspective(fovy, width/height, near, far), LA::perspective(fovy, width, height, near, far)))
             failedTests++;
     }
-    printf("LA::perspective(...) test FINISHED on %d / %d tests.   (SIGMA = %f)\n", (numTests - failedTests), numTests, SIGMA);
+    printf("LA::perspective(...) test FINISHED. %.2f percent matching.   (NUM_TESTS = %d)(SIGMA = %f)\n", (float)(numTests - failedTests) / numTests * 100, numTests, SIGMA);
     return true;
 }
 //____________________________________________________________________
@@ -97,7 +97,7 @@ bool TestUtils::translateTest(int numTests){
             failedTests++;
         }
     }
-    printf("LA::translate(...) test FINISHED on %d / %d tests.   (SIGMA = %f)\n", (numTests - failedTests), numTests, SIGMA);
+    printf("LA::translate(...) test FINISHED. %.2f percent matching.   (NUM_TESTS = %d)(SIGMA = %f)\n", (float)(numTests - failedTests) / numTests * 100, numTests, SIGMA);
     return true;
 }
 //____________________________________________________________________
@@ -116,7 +116,7 @@ bool TestUtils::rotateTest(int numTests){
             failedTests++;
         }
     }
-    printf("LA::rotate(...) test FINISHED on %d / %d tests.   (SIGMA = %f)\n", (numTests - failedTests), numTests, SIGMA);
+    printf("LA::rotate(...) test FINISHED. %.2f percent matching.   (NUM_TESTS = %d)(SIGMA = %f)\n", (float)(numTests - failedTests) / numTests * 100, numTests, SIGMA);
     return true;
 }
 //____________________________________________________________________
@@ -131,7 +131,7 @@ bool TestUtils::scaleTest(int numTests){
             failedTests++;
         }
     }
-    printf("LA::scale(...) test FINISHED on %d / %d tests.   (SIGMA = %f)\n", (numTests - failedTests), numTests, SIGMA);
+    printf("LA::scale(...) test FINISHED. %.2f percent matching.   (NUM_TESTS = %d)(SIGMA = %f)\n", (float)(numTests - failedTests) / numTests * 100, numTests, SIGMA);
     return true;
 }
 //____________________________________________________________________
@@ -144,7 +144,7 @@ bool TestUtils::inverseTest(int numTests){
             failedTests++;
         }
     }
-    printf("LA::inverse(...) test FINISHED on %d / %d tests.   (SIGMA = %f)\n", (numTests - failedTests), numTests, SIGMA);
+    printf("LA::inverse(...) test FINISHED. %.2f percent matching.   (NUM_TESTS = %d)(SIGMA = %f)\n", (float)(numTests - failedTests) / numTests * 100, numTests, SIGMA);
     return true;
 }
 //____________________________________________________________________
@@ -171,7 +171,7 @@ bool TestUtils::normalizeTest(int numTests){
             failedTests++;
         }
     }
-    printf("LA::normalize(...) test FINISHED on %d / %d tests.   (SIGMA = %f)\n", (numTests - failedTests), numTests, SIGMA);
+    printf("LA::normalize(...) test FINISHED. %.2f percent matching.   (NUM_TESTS = %d)(SIGMA = %f)\n", (float)(numTests - failedTests) / numTests * 100, numTests, SIGMA);
     return true;
 }
 //____________________________________________________________________
@@ -190,7 +190,7 @@ bool TestUtils::lengthTest(int numTests){
         }
         
     }
-    printf("LA::length(...) test FINISHED on %d / %d tests.   (SIGMA = %f)\n", (numTests - failedTests), numTests, SIGMA);
+    printf("LA::length(...) test FINISHED. %.2f percent matching.   (NUM_TESTS = %d)(SIGMA = %f)\n", (float)(numTests - failedTests) / numTests * 100, numTests, SIGMA);
     return true;
 }
 //____________________________________________________________________
@@ -208,7 +208,7 @@ bool TestUtils::dotProductTest(int numTests){
             failedTests++;
         }
     }
-    printf("LA::dot(...) test FINISHED on %d / %d tests.   (SIGMA = %f)\n", (numTests - failedTests), numTests, SIGMA);
+    printf("LA::dot(...) test FINISHED. %.2f percent matching.   (NUM_TESTS = %d)(SIGMA = %f)\n", (float)(numTests - failedTests) / numTests * 100, numTests, SIGMA);
     return true;
 }
 //____________________________________________________________________
@@ -226,7 +226,7 @@ bool TestUtils::crossProductTest(int numTests){
             failedTests++;
         }
     }
-    printf("LA::cross(...) test FINISHED on %d / %d tests.   (SIGMA = %f)\n", (numTests - failedTests), numTests, SIGMA);
+    printf("LA::cross(...) test FINISHED. %.2f percent matching.   (NUM_TESTS = %d)(SIGMA = %f)\n", (float)(numTests - failedTests) / numTests * 100, numTests, SIGMA);
     return true;
 }
 //____________________________________________________________________
