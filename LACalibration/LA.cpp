@@ -9,6 +9,9 @@
 
 // V3D definition
 V3D::V3D(){}
+V3D::V3D(float a){
+    v[0] = v[1] = v[2] = a;
+}
 V3D::V3D(float x, float y, float z){
     v[0] = x; v[1] = y; v[2] = z;
 }

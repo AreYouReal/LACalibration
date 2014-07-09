@@ -16,7 +16,6 @@ int main(int argc, const char * argv[]){
     TestUtils::testM4Dfunctionality(10000);
     TestUtils::testV3Dfunctionality(10000);
     
-    
     return 0;
 }
 

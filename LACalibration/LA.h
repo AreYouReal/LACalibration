@@ -28,6 +28,7 @@ void print(const V4D& vec4);
 struct V3D{
 public:
 	V3D();
+    V3D(float a);
 	V3D(float x, float y, float z);
 	V3D(const V4D& vec);
 	~V3D();
