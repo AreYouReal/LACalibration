@@ -4,8 +4,7 @@
 // When Jeff Dean's code has undefined behavior, a unicorn rides in on a rainbow and gives everybody free ice cream."
 // (c) Astounding 'Facts' About Google's Most Badass Engineer, Jeff Dean
  
-#ifndef LA_H
-#define LA_H
+#pragma once
 
 #include <cmath>
 
@@ -15,7 +14,6 @@ struct V4D{
 public:
 	V4D();
 	V4D(float x, float y, float z, float w);
-	~V4D();
 
 	float& operator[](int i);
 	void operator=(const V4D& vec);
@@ -31,7 +29,6 @@ public:
     V3D(float a);
 	V3D(float x, float y, float z);
 	V3D(const V4D& vec);
-	~V3D();
 
 	float& operator[](int i);
 	void operator=(const V3D& vec);
@@ -47,6 +44,29 @@ V3D operator-(const V3D& v1, const V3D& v2);
 V3D operator-(const V3D& vec);
 V3D operator/(V3D& vec3, const float scalar);
 
+struct Q4D{
+public:
+    Q4D();
+    Q4D(float x, float y, float z, float w);
+    
+    
+    float& operator[](int i);
+    void operator=(const Q4D& quat);
+    void operator=(const V4D& vec);
+    Q4D operator*(const float scale);
+    
+    
+    float magnitude();
+    Q4D conjugate();
+    
+    float q[4]{0.0, 0.0, 0.0, 1.0};
+};
+
+Q4D operator*(const Q4D& q1, const Q4D& q2);
+Q4D operator*(const Q4D& q1, const float scale);
+Q4D operator+(const Q4D& q1, const Q4D& q2);
+
+
 struct M4D{
 public:
 	M4D();
@@ -56,7 +76,6 @@ public:
 			 float m21, float m22, float m23, float m24,
 			 float m31, float m32, float m33, float m34,
 			 float m41, float m42, float m43, float m44);
-	~M4D();
 
 	void operator=(const M4D& m4);
 
@@ -76,8 +95,6 @@ V4D operator*(const M4D& m, V4D& vec);
 
 struct LA{
 public:
-	LA();
-	~LA();
 
 	static float dot(const V3D& v1, const V3D& v2);
 	static V3D cross(const V3D& v1, const V3D& v2);
@@ -102,5 +119,3 @@ public:
     static float* getPointer(V3D& vec);
 };
 
-
-#endif	//LA_H

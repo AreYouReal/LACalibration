@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>IDESourceControlProjectFavoriteDictionaryKey</key>
+	<false/>
+	<key>IDESourceControlProjectIdentifier</key>
+	<string>0828C8CA-CE84-4E87-B87B-FB9C71991B8C</string>
+	<key>IDESourceControlProjectName</key>
+	<string>LACalibration</string>
+	<key>IDESourceControlProjectOriginsDictionary</key>
+	<dict>
+		<key>5FBB3A499DFF67945D49704030BE90131F05738C</key>
+		<string>https://github.com/AreYouReal/LACalibration.git</string>
+	</dict>
+	<key>IDESourceControlProjectPath</key>
+	<string>LACalibration.xcodeproj</string>
+	<key>IDESourceControlProjectRelativeInstallPathDictionary</key>
+	<dict>
+		<key>5FBB3A499DFF67945D49704030BE90131F05738C</key>
+		<string>../..</string>
+	</dict>
+	<key>IDESourceControlProjectURL</key>
+	<string>https://github.com/AreYouReal/LACalibration.git</string>
+	<key>IDESourceControlProjectVersion</key>
+	<integer>111</integer>
+	<key>IDESourceControlProjectWCCIdentifier</key>
+	<string>5FBB3A499DFF67945D49704030BE90131F05738C</string>
+	<key>IDESourceControlProjectWCConfigurations</key>
+	<array>
+		<dict>
+			<key>IDESourceControlRepositoryExtensionIdentifierKey</key>
+			<string>public.vcs.git</string>
+			<key>IDESourceControlWCCIdentifierKey</key>
+			<string>5FBB3A499DFF67945D49704030BE90131F05738C</string>
+			<key>IDESourceControlWCCName</key>
+			<string>LACalibration</string>
+		</dict>
+	</array>
+</dict>
+</plist>

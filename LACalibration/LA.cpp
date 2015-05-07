@@ -18,7 +18,6 @@ V3D::V3D(float x, float y, float z){
 V3D::V3D(const V4D& vec){
 	v[0] = vec.v[0] / vec.v[3]; v[1] = vec.v[1] / vec.v[3]; v[2] = vec.v[2] / vec.v[3];
 }
-V3D::~V3D(){}
 float& V3D::operator[](int i){
     return i > 2 ? v[0] : v[i];
 };
@@ -64,7 +63,7 @@ V4D::V4D(){}
 V4D::V4D(float x, float y, float z, float w){
     v[0] = x; v[1] = y; v[2] = z; v[3] = w;
 }
-V4D::~V4D(){}
+
 float& V4D::operator[](int i){
     return i > 3 ? v[0] : v[i];
 }
@@ -75,6 +74,51 @@ void V4D::operator=(const V4D& vec){
 void print(const V4D& vec4){
 	std::cout << "[ " << vec4.v[0] << ", " << vec4.v[1] << ", " << vec4.v[2] << ", " << vec4.v[3] << " ]" << std::endl;
 }
+
+
+Q4D::Q4D(){}
+Q4D::Q4D(float x, float y, float z, float w){
+    q[0] = x; q[1] = y; q[2] = z; q[3] = w;
+}
+float& Q4D::operator[](int i){
+    return i > 3 ? q[0] : q[1];
+}
+void Q4D::operator=(const Q4D& quaternion){
+    q[0] = quaternion.q[0]; q[1] = quaternion.q[1]; q[2] = quaternion.q[2]; q[3] = quaternion.q[3];
+}
+Q4D Q4D::operator*(const float scale){
+    Q4D quaternion = Q4D(q[0] * scale, q[1] * scale, q[2] * scale, q[3] * scale);
+    return quaternion;
+}
+float Q4D::magnitude(){
+    return sqrtf( q[0] * q[0] + q[1] * q[1] + q[2] * q[2] + q[3] * q[3] );
+}
+Q4D Q4D::conjugate(){
+    return Q4D(-q[0], -q[1], -q[2], q[3]);
+}
+
+Q4D operator*(const Q4D& q1, const Q4D& q2){
+    Q4D quaternion;
+    quaternion.q[0] = q1.q[0] * q2.q[3] + q1.q[1] * q2.q[2] - q1.q[2] * q2.q[1] + q1.q[3] * q2.q[0];
+    quaternion.q[1] = -q1.q[0] * q2.q[2] + q1.q[1] * q2.q[3] + q1.q[2] * q2.q[0] + q1.q[3] * q2.q[1];
+    quaternion.q[2] = q1.q[0] * q2.q[1] - q1.q[1] * q2.q[0] + q1.q[2] * q2.q[3] + q1.q[3] * q2.q[2];
+    quaternion.q[3] = -q1.q[0] * q2.q[0] - q1.q[1] * q2.q[1] - q1.q[2] * q2.q[2] + q1.q[3] * q2.q[3];
+    return quaternion;
+}
+
+Q4D operator+(const Q4D& q1, const Q4D& q2){
+    Q4D quaternion(q1.q[0] + q2.q[0], q1.q[1] + q2.q[1], q1.q[2] + q2.q[2], q1.q[3] + q2.q[3]);
+    return quaternion;
+}
+
+//public final void mul(Quat4d q1,Quat4d q2) {
+//    x =  q1.x * q2.w + q1.y * q2.z - q1.z * q2.y + q1.w * q2.x;
+//    y = -q1.x * q2.z + q1.y * q2.w + q1.z * q2.x + q1.w * q2.y;
+//    z =  q1.x * q2.y - q1.y * q2.x + q1.z * q2.w + q1.w * q2.z;
+//    w = -q1.x * q2.x - q1.y * q2.y - q1.z * q2.z + q1.w * q2.w;
+//}
+
+
 
 // M4D definition
 M4D::M4D(){
@@ -112,7 +156,6 @@ M4D::M4D(float m00, float m01, float m02, float m03,
 	m[2][0] = m20; m[2][1] = m21; m[2][2] = m22; m[2][3] = m23;
 	m[3][0] = m30; m[3][1] = m31; m[3][2] = m32; m[3][3] = m33;
 }
-M4D::~M4D(){};
 
 void M4D::operator=(const M4D& m4){
 	for(int i = 0; i < 4; i++){
@@ -192,8 +235,6 @@ V4D operator*(const M4D& m, V4D& vec){
 
 // LA - Linear Algebra class definition
 // static method to operate with V3D, Point3D, etc...
-LA::LA(){}
-LA::~LA(){}
 
 // V3D operation definitions (dot product, cross product, length, normalize operation)
 float LA::dot(const V3D& v1, const V3D& v2){
