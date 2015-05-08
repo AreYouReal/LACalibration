@@ -44,27 +44,7 @@ V3D operator-(const V3D& v1, const V3D& v2);
 V3D operator-(const V3D& vec);
 V3D operator/(V3D& vec3, const float scalar);
 
-struct Q4D{
-public:
-    Q4D();
-    Q4D(float x, float y, float z, float w);
-    
-    
-    float& operator[](int i);
-    void operator=(const Q4D& quat);
-    void operator=(const V4D& vec);
-    Q4D operator*(const float scale);
-    
-    
-    float magnitude();
-    Q4D conjugate();
-    
-    float q[4]{0.0, 0.0, 0.0, 1.0};
-};
 
-Q4D operator*(const Q4D& q1, const Q4D& q2);
-Q4D operator*(const Q4D& q1, const float scale);
-Q4D operator+(const Q4D& q1, const Q4D& q2);
 
 
 struct M4D{
@@ -93,6 +73,33 @@ M4D operator-(const M4D& m1, const M4D& m2);
 
 V4D operator*(const M4D& m, V4D& vec);
 
+struct Q4D{
+public:
+    Q4D();
+    Q4D(const Q4D& quaternion);
+    Q4D(float x, float y, float z, float w);
+    
+    
+    float& operator[](int i);
+    void operator=(const Q4D& quat);
+    void operator=(const V4D& vec);
+    Q4D operator*(const float scale);
+    
+    
+    float magnitude();
+    Q4D conjugate();
+    M4D matrix();
+    void normalize();
+    Q4D unit();
+    
+    float q[4]{0.0, 0.0, 0.0, 1.0};
+};
+
+Q4D operator*(const Q4D& q1, const Q4D& q2);
+Q4D operator*(const Q4D& q1, const float scale);
+Q4D operator+(const Q4D& q1, const Q4D& q2);
+
+
 struct LA{
 public:
 
@@ -115,6 +122,7 @@ public:
 	static M4D scale(V3D& scale);
 	static M4D translate(float x, float y, float z);
 	static M4D translate(V3D& translate);
+    
 	static float* getPointer(M4D& mat);
     static float* getPointer(V3D& vec);
 };
