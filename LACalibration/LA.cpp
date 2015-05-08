@@ -6,7 +6,7 @@
 #include <iostream>
 
 // Attention! LA it is a ROW MAJOR linear algebra library
-
+#pragma VECTORS
 // V3D definition
 V3D::V3D(){}
 V3D::V3D(float a){
@@ -75,7 +75,7 @@ void print(const V4D& vec4){
 	std::cout << "[ " << vec4.v[0] << ", " << vec4.v[1] << ", " << vec4.v[2] << ", " << vec4.v[3] << " ]" << std::endl;
 }
 
-
+#pragma mark QUATERNIONS
 Q4D::Q4D(){}
 Q4D::Q4D(float x, float y, float z, float w){
     q[0] = x; q[1] = y; q[2] = z; q[3] = w;
@@ -111,15 +111,8 @@ Q4D operator+(const Q4D& q1, const Q4D& q2){
     return quaternion;
 }
 
-//public final void mul(Quat4d q1,Quat4d q2) {
-//    x =  q1.x * q2.w + q1.y * q2.z - q1.z * q2.y + q1.w * q2.x;
-//    y = -q1.x * q2.z + q1.y * q2.w + q1.z * q2.x + q1.w * q2.y;
-//    z =  q1.x * q2.y - q1.y * q2.x + q1.z * q2.w + q1.w * q2.z;
-//    w = -q1.x * q2.x - q1.y * q2.y - q1.z * q2.z + q1.w * q2.w;
-//}
 
-
-
+#pragma mark MATRICES
 // M4D definition
 M4D::M4D(){
 	for(int i = 0; i < 4; i++){
@@ -235,7 +228,7 @@ V4D operator*(const M4D& m, V4D& vec){
 
 // LA - Linear Algebra class definition
 // static method to operate with V3D, Point3D, etc...
-
+#pragma LA
 // V3D operation definitions (dot product, cross product, length, normalize operation)
 float LA::dot(const V3D& v1, const V3D& v2){
 	return (v1.v[0] * v2.v[0]) + (v1.v[1] * v2.v[1]) + (v1.v[2] * v2.v[2]);
