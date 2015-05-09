@@ -56,4 +56,3 @@ v3d operator-(const v3d& v1, const v3d& v2);
 v3d operator-(const v3d& vec);
 v3d operator/(v3d& vec3, const float scalar);
 
-

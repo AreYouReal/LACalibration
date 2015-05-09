@@ -2,28 +2,29 @@
 
 #include "v3d.h"
 
-struct Q4D{
+struct q4d{
 public:
-    Q4D();
-    Q4D(const Q4D& quaternion);
-    Q4D(float x, float y, float z, float w);
-    
+    q4d();
+    q4d(const q4d& quaternion);
+    q4d(const v4d& vec);
+    q4d(const v3d& vec);
+    q4d(const m4d& mat);
+    q4d(const float angle, float x, float y, float z);
+    q4d(const float angle, const v3d& axis);
     
     float& operator[](int i);
-    void operator=(const Q4D& quat);
-    void operator=(const v4d& vec);
-    Q4D operator*(const float scale);
-    
+    void operator=(const q4d& quat);
+    q4d operator*(const float scale);
     
     float magnitude();
-    Q4D conjugate();
+    q4d conjugate();
     m4d matrix();
     void normalize();
-    Q4D unit();
+    q4d unit();
     
     float q[4]{0.0, 0.0, 0.0, 1.0};
 };
 
-Q4D operator*(const Q4D& q1, const Q4D& q2);
-Q4D operator*(const Q4D& q1, const float scale);
-Q4D operator+(const Q4D& q1, const Q4D& q2);
+q4d operator*(const q4d& q1, const q4d& q2);
+q4d operator*(const q4d& q1, const float scale);
+q4d operator+(const q4d& q1, const q4d& q2);

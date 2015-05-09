@@ -100,7 +100,12 @@ private:
     static bool dotProductTest  (int numTests);
     static bool crossProductTest(int numTests);
     
+// q3d related tests
+    static bool qaternionRotateVector(int numTests);
+    
 public:
     static bool testv3dfunctionality(int numTests);
     static bool testm4dfunctionality(int numTests);
+    static bool testQuaternionFunctionality(int numTests);
+    
 };

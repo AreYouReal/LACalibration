@@ -280,3 +280,13 @@ bool TestUtils::crossProductTest(int numTests){
     return true;
 }
 //____________________________________________________________________
+bool TestUtils::qaternionRotateVector(int numTests){
+    
+    v3d axis(1, 0, 0);
+    m4d rotationMatrix = m4d::rotate(30, axis);
+    
+            
+    
+    
+    return true;
+}

@@ -53,7 +53,6 @@ v3d operator/(const v3d& vec3, const float scalar){
     return rVec3;
 }
 
-
 float v3d::dot(const v3d& v1, const v3d& v2){
     return (v1.v[0] * v2.v[0]) + (v1.v[1] * v2.v[1]) + (v1.v[2] * v2.v[2]);
 };
@@ -84,6 +83,11 @@ float* v3d::pointer(){
 v4d::v4d(){}
 v4d::v4d(float x, float y, float z, float w){
     v[0] = x; v[1] = y; v[2] = z; v[3] = w;
+}
+v4d::v4d(const v3d& vec){
+    for(int i = 0; i < 3; ++i)
+        v[i] = vec.v[i];
+    v[3] = 0.0f;
 }
 
 float& v4d::operator[](int i){
