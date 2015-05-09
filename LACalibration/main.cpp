@@ -7,14 +7,13 @@
 //
 
 #include "TestUtils.h"
-#include "LA.h"
 #include <iostream>
 
 int main(int argc, const char * argv[]){
 
     srand(time(0));    
-    TestUtils::testM4Dfunctionality(10000);
-    TestUtils::testV3Dfunctionality(10000);
+    TestUtils::testm4dfunctionality(10000);
+    TestUtils::testv3dfunctionality(10000);
     
     return 0;
 }

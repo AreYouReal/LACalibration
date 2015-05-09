@@ -7,10 +7,12 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		9433EC9D1961C930007770A6 /* LA.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 9433EBB41961C930007770A6 /* LA.cpp */; };
 		9433EC9E1961C930007770A6 /* main.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 9433EBB61961C930007770A6 /* main.cpp */; };
 		9433EC9F1961C930007770A6 /* dummy.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 9433EBBF1961C930007770A6 /* dummy.cpp */; };
 		9465FA71196473EB00E75557 /* TestUtils.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 9465FA70196473EB00E75557 /* TestUtils.cpp */; };
+		94E8B8CC1AFDC08E00B580DE /* V3D.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 94E8B8CB1AFDC08E00B580DE /* V3D.cpp */; };
+		94E8B8CF1AFDD55D00B580DE /* Q4D.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 94E8B8CD1AFDD55D00B580DE /* Q4D.cpp */; };
+		94E8B8D21AFDD5D100B580DE /* m4d.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 94E8B8D01AFDD5D100B580DE /* m4d.cpp */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -27,8 +29,6 @@
 
 /* Begin PBXFileReference section */
 		9433EBA81961C530007770A6 /* LACalibration */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = LACalibration; sourceTree = BUILT_PRODUCTS_DIR; };
-		9433EBB41961C930007770A6 /* LA.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = LA.cpp; sourceTree = "<group>"; };
-		9433EBB51961C930007770A6 /* LA.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LA.h; sourceTree = "<group>"; };
 		9433EBB61961C930007770A6 /* main.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = main.cpp; sourceTree = "<group>"; };
 		9433EBB81961C930007770A6 /* CMakeLists.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = CMakeLists.txt; sourceTree = "<group>"; };
 		9433EBBA1961C930007770A6 /* _detail.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = _detail.hpp; sourceTree = "<group>"; };
@@ -257,6 +257,12 @@
 		9433EC9C1961C930007770A6 /* xstream.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = xstream.hpp; sourceTree = "<group>"; };
 		9465FA6F1964719300E75557 /* TestUtils.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TestUtils.h; sourceTree = "<group>"; };
 		9465FA70196473EB00E75557 /* TestUtils.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = TestUtils.cpp; sourceTree = "<group>"; };
+		94E8B8CA1AFDC05E00B580DE /* V3D.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = V3D.h; sourceTree = "<group>"; };
+		94E8B8CB1AFDC08E00B580DE /* V3D.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = V3D.cpp; sourceTree = "<group>"; };
+		94E8B8CD1AFDD55D00B580DE /* Q4D.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Q4D.cpp; sourceTree = "<group>"; };
+		94E8B8CE1AFDD55D00B580DE /* Q4D.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Q4D.h; sourceTree = "<group>"; };
+		94E8B8D01AFDD5D100B580DE /* m4d.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = m4d.cpp; sourceTree = "<group>"; };
+		94E8B8D11AFDD5D100B580DE /* m4d.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = m4d.h; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -291,10 +297,14 @@
 			children = (
 				9465FA6F1964719300E75557 /* TestUtils.h */,
 				9465FA70196473EB00E75557 /* TestUtils.cpp */,
-				9433EBB41961C930007770A6 /* LA.cpp */,
-				9433EBB51961C930007770A6 /* LA.h */,
 				9433EBB61961C930007770A6 /* main.cpp */,
 				9433EBB71961C930007770A6 /* glm */,
+				94E8B8CA1AFDC05E00B580DE /* V3D.h */,
+				94E8B8CB1AFDC08E00B580DE /* V3D.cpp */,
+				94E8B8CD1AFDD55D00B580DE /* Q4D.cpp */,
+				94E8B8CE1AFDD55D00B580DE /* Q4D.h */,
+				94E8B8D01AFDD5D100B580DE /* m4d.cpp */,
+				94E8B8D11AFDD5D100B580DE /* m4d.h */,
 			);
 			path = LACalibration;
 			sourceTree = "<group>";
@@ -615,8 +625,10 @@
 			buildActionMask = 2147483647;
 			files = (
 				9433EC9E1961C930007770A6 /* main.cpp in Sources */,
+				94E8B8D21AFDD5D100B580DE /* m4d.cpp in Sources */,
+				94E8B8CC1AFDC08E00B580DE /* V3D.cpp in Sources */,
 				9433EC9F1961C930007770A6 /* dummy.cpp in Sources */,
-				9433EC9D1961C930007770A6 /* LA.cpp in Sources */,
+				94E8B8CF1AFDD55D00B580DE /* Q4D.cpp in Sources */,
 				9465FA71196473EB00E75557 /* TestUtils.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

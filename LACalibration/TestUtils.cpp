@@ -8,17 +8,17 @@
 
 #include "TestUtils.h"
 
-#pragma mark M4D tests
+#pragma mark m4d tests
 //____________________________________________________________________
-bool TestUtils::testM4Dfunctionality(int numTests){
-    printf("M4D tests: \n");
-    return (scaleTest(numTests) && rotateTest(numTests) && translateTest(numTests) && inverseTest(numTests) && lookAtTest(numTests) && orthoTest(numTests) && perspectiveTest(numTests) && M4DaddTest(numTests) && M4DsubTest(numTests) && M4DmultTest(numTests));
+bool TestUtils::testm4dfunctionality(int numTests){
+    printf("m4d tests: \n");
+    return (scaleTest(numTests) && rotateTest(numTests) && translateTest(numTests) && inverseTest(numTests) && lookAtTest(numTests) && orthoTest(numTests) && perspectiveTest(numTests) && m4daddTest(numTests) && m4dsubTest(numTests) && m4dmultTest(numTests));
 }
 //____________________________________________________________________
 bool TestUtils::lookAtTest(int numTests){
     int failedTests = 0;
     glm::vec3 glmEye , glmCenter, glmUp;
-    V3D laEye, laCenter, laUp;
+    v3d laEye, laCenter, laUp;
     for(int i = 0; i < numTests; ++i){
         glmEye       = glmrndvec();
         glmCenter    = glmrndvec();
@@ -36,7 +36,7 @@ bool TestUtils::lookAtTest(int numTests){
         laUp       = laVecFromglmVec(glmUp);
         
         if(!TestUtils::m4equality(glm::lookAt(glmEye, glmCenter, glmUp),
-                                  LA::lookAt(laEye, laCenter, laUp))){
+                                  m4d::lookAt(laEye, laCenter, laUp))){
             failedTests++;
         }
     }
@@ -60,7 +60,7 @@ bool TestUtils::orthoTest(int numTests){
             top     = rnd(1000);
             bottom  = rnd(1000);
         }
-        if(!TestUtils::m4equality(glm::ortho(left, right, top, bottom, near, far), LA::ortho(left, right, top, bottom, near, far)))
+        if(!TestUtils::m4equality(glm::ortho(left, right, top, bottom, near, far), m4d::ortho(left, right, top, bottom, near, far)))
             failedTests++;
     }
     printf("LA::ortho(...) test FINISHED. %.2f percent matching.   (NUM_TESTS = %d)(SIGMA = %f)\n", (float)(numTests - failedTests) / numTests * 100, numTests, SIGMA);
@@ -80,7 +80,7 @@ bool TestUtils::perspectiveTest(int numTests){
             width   = rnd(1000);
             height  = rnd(1000);
         }
-        if(!TestUtils::m4equality(glm::perspective(fovy, width/height, near, far), LA::perspective(fovy, width, height, near, far)))
+        if(!TestUtils::m4equality(glm::perspective(fovy, width/height, near, far), m4d::perspective(fovy, width, height, near, far)))
             failedTests++;
     }
     printf("LA::perspective(...) test FINISHED. %.2f percent matching.   (NUM_TESTS = %d)(SIGMA = %f)\n", (float)(numTests - failedTests) / numTests * 100, numTests, SIGMA);
@@ -90,11 +90,11 @@ bool TestUtils::perspectiveTest(int numTests){
 bool TestUtils::translateTest(int numTests){
     int failedTests = 0;
     glm::vec3 glmMove;
-    V3D laMove;
+    v3d laMove;
     for(int i = 0; i < numTests; ++i){
         glmMove = glmrndvec();
         laMove  = laVecFromglmVec(glmMove);
-        if(!TestUtils::m4equality(glm::translate(glmMove), LA::translate(laMove))){
+        if(!TestUtils::m4equality(glm::translate(glmMove), m4d::translate(laMove))){
             failedTests++;
         }
     }
@@ -105,7 +105,7 @@ bool TestUtils::translateTest(int numTests){
 bool TestUtils::rotateTest(int numTests){
     int failedTests = 0;
     glm::vec3 glmAxis;
-    V3D laAxis;
+    v3d laAxis;
     float angle;
     for(int i = 0; i < numTests; ++i){
         glmAxis = glmrndvec();
@@ -113,7 +113,7 @@ bool TestUtils::rotateTest(int numTests){
             glmAxis = glmrndvec();
         laAxis  = laVecFromglmVec(glmAxis);
         angle = rnd(1000);
-        if(!TestUtils::m4equality(glm::rotate(angle, glmAxis), LA::rotate(angle, laAxis))){
+        if(!TestUtils::m4equality(glm::rotate(angle, glmAxis), m4d::rotate(angle, laAxis))){
             failedTests++;
         }
     }
@@ -124,11 +124,11 @@ bool TestUtils::rotateTest(int numTests){
 bool TestUtils::scaleTest(int numTests){
     int failedTests = 0;
     glm::vec3 glmScale;
-    V3D laScale;
+    v3d laScale;
     for(int i = 0; i < numTests; ++i){
         glmScale = glmrndvec();
         laScale  = laVecFromglmVec(glmScale);
-        if(!TestUtils::m4equality(glm::scale(glmScale), LA::scale(laScale))){
+        if(!TestUtils::m4equality(glm::scale(glmScale), m4d::scale(laScale))){
             failedTests++;
         }
     }
@@ -139,9 +139,9 @@ bool TestUtils::scaleTest(int numTests){
 bool TestUtils::inverseTest(int numTests){
     int failedTests = 0;
     glm::mat4   glmMat  = glmrndmat4();
-    M4D    laMat   = laMatrix4FromglmMat4(glmMat);
+    m4d    laMat   = laMatrix4FromglmMat4(glmMat);
     for(int i = 0; i < numTests; ++i){
-        if(!TestUtils::m4equality(glm::inverse(glmMat), LA::inverse(laMat))){
+        if(!TestUtils::m4equality(glm::inverse(glmMat), m4d::inverse(laMat))){
             failedTests++;
         }
     }
@@ -149,65 +149,65 @@ bool TestUtils::inverseTest(int numTests){
     return true;
 }
 //____________________________________________________________________
-bool TestUtils::M4DmultTest(int numTests){
+bool TestUtils::m4dmultTest(int numTests){
     int failedTests = 0;
     glm::mat4   glmM_1  = glmrndmat4();
     glm::mat4   glmM_2  = glmrndmat4();
-    M4D         laM_1   = laMatrix4FromglmMat4(glmM_1);
-    M4D         laM_2   = laMatrix4FromglmMat4(glmM_2);
+    m4d         laM_1   = laMatrix4FromglmMat4(glmM_1);
+    m4d         laM_2   = laMatrix4FromglmMat4(glmM_2);
     
     for(int i = 0; i < numTests; ++i){
         if(!TestUtils::m4equality(glmM_1 * glmM_2, laM_1 * laM_2)){
             failedTests++;
         }
     }
-    printf("LA::M4Dmulti(...) test FINISHED. %.2f percent matching.   (NUM_TESTS = %d)(SIGMA = %f)\n", (float)(numTests - failedTests) / numTests * 100, numTests, SIGMA);
+    printf("LA::m4dmulti(...) test FINISHED. %.2f percent matching.   (NUM_TESTS = %d)(SIGMA = %f)\n", (float)(numTests - failedTests) / numTests * 100, numTests, SIGMA);
     return true;
 }
 //____________________________________________________________________
-bool TestUtils::M4DaddTest(int numTests){
+bool TestUtils::m4daddTest(int numTests){
     int failedTests = 0;
     glm::mat4   glmM_1  = glmrndmat4();
     glm::mat4   glmM_2  = glmrndmat4();
-    M4D         laM_1   = laMatrix4FromglmMat4(glmM_1);
-    M4D         laM_2   = laMatrix4FromglmMat4(glmM_2);
+    m4d         laM_1   = laMatrix4FromglmMat4(glmM_1);
+    m4d         laM_2   = laMatrix4FromglmMat4(glmM_2);
     
     for(int i = 0; i < numTests; ++i){
         if(!TestUtils::m4equality(glmM_1 + glmM_2, laM_1 + laM_2)){
             failedTests++;
         }
     }
-    printf("LA::M4Dadd(...) test FINISHED. %.2f percent matching.   (NUM_TESTS = %d)(SIGMA = %f)\n", (float)(numTests - failedTests) / numTests * 100, numTests, SIGMA);
+    printf("LA::m4dadd(...) test FINISHED. %.2f percent matching.   (NUM_TESTS = %d)(SIGMA = %f)\n", (float)(numTests - failedTests) / numTests * 100, numTests, SIGMA);
     return true;
 }
 //____________________________________________________________________
-bool TestUtils::M4DsubTest(int numTests){
+bool TestUtils::m4dsubTest(int numTests){
     int failedTests = 0;
     glm::mat4   glmM_1  = glmrndmat4();
     glm::mat4   glmM_2  = glmrndmat4();
-    M4D         laM_1   = laMatrix4FromglmMat4(glmM_1);
-    M4D         laM_2   = laMatrix4FromglmMat4(glmM_2);
+    m4d         laM_1   = laMatrix4FromglmMat4(glmM_1);
+    m4d         laM_2   = laMatrix4FromglmMat4(glmM_2);
     
     for(int i = 0; i < numTests; ++i){
         if(!TestUtils::m4equality(glmM_1 - glmM_2, laM_1 - laM_2)){
             failedTests++;
         }
     }
-    printf("LA::M4Dsub(...) test FINISHED. %.2f percent matching.   (NUM_TESTS = %d)(SIGMA = %f)\n", (float)(numTests - failedTests) / numTests * 100, numTests, SIGMA);
+    printf("LA::m4dsub(...) test FINISHED. %.2f percent matching.   (NUM_TESTS = %d)(SIGMA = %f)\n", (float)(numTests - failedTests) / numTests * 100, numTests, SIGMA);
     return true;
 }
 //____________________________________________________________________
-#pragma mark V3D tests
+#pragma mark v3d tests
 //____________________________________________________________________
-bool TestUtils::testV3Dfunctionality(int numTests){
-    printf("V3D tests: \n");
+bool TestUtils::testv3dfunctionality(int numTests){
+    printf("v3d tests: \n");
     return (normalizeTest(numTests) && lengthTest(numTests) && dotProductTest(numTests) &&crossProductTest(numTests));
 }
 //____________________________________________________________________
 bool TestUtils::normalizeTest(int numTests){
     int failedTests = 0;
     glm::vec3   glmVec;
-    V3D         laVec;
+    v3d         laVec;
     for(int i = 0; i < numTests; ++i){
         glmVec  = glmrndvec();
         while(glmVec.x == 0 || glmVec.y == 0 || glmVec.z == 0)
@@ -215,7 +215,7 @@ bool TestUtils::normalizeTest(int numTests){
         
         laVec   = laVecFromglmVec(glmVec);
         glmVec  = glm::normalize(glmVec);
-        laVec   = LA::normalize(laVec);
+        laVec   = v3d::normalize(laVec);
         
         if(!TestUtils::v3equality(glmVec, laVec)){
             failedTests++;
@@ -228,14 +228,14 @@ bool TestUtils::normalizeTest(int numTests){
 bool TestUtils::lengthTest(int numTests){
     int failedTests = 0;
     glm::vec3   glmVec;
-    V3D         laVec;
+    v3d         laVec;
     for(int i = 0; i < numTests; ++i){
         glmVec  = glmrndvec();
         while(glmVec.x == 0 && glmVec.y == 0 && glmVec.z == 0)
             glmVec = glmrndvec();
         
         laVec   = laVecFromglmVec(glmVec);
-        if(!(glm::length(glmVec) - LA::length(laVec) < SIGMA)){
+        if(!(glm::length(glmVec) - v3d::length(laVec) < SIGMA)){
             failedTests++;
         }
         
@@ -247,14 +247,14 @@ bool TestUtils::lengthTest(int numTests){
 bool TestUtils::dotProductTest(int numTests){
     int failedTests = 0;
     glm::vec3   glmVec_1, glmVec_2;
-    V3D         laVec_1, laVec_2;
+    v3d         laVec_1, laVec_2;
     for(int i = 0; i < numTests; ++i){
         glmVec_1 = glmrndvec();
         glmVec_2 = glmrndvec();
         laVec_1  = laVecFromglmVec(glmVec_1);
         laVec_2  = laVecFromglmVec(glmVec_2);
         
-        if(!(glm::dot(glmVec_1, glmVec_2) - LA::dot(laVec_1, laVec_2) < SIGMA)){
+        if(!(glm::dot(glmVec_1, glmVec_2) - v3d::dot(laVec_1, laVec_2) < SIGMA)){
             failedTests++;
         }
     }
@@ -265,14 +265,14 @@ bool TestUtils::dotProductTest(int numTests){
 bool TestUtils::crossProductTest(int numTests){
     int failedTests = 0;
     glm::vec3   glmVec_1, glmVec_2;
-    V3D         laVec_1, laVec_2;
+    v3d         laVec_1, laVec_2;
     for(int i = 0; i < numTests; ++i){
         glmVec_1 = glmrndvec();
         glmVec_2 = glmrndvec();
         laVec_1  = laVecFromglmVec(glmVec_1);
         laVec_2  = laVecFromglmVec(glmVec_2);
         
-        if(!(v3equality(glm::cross(glmVec_1, glmVec_2), LA::cross(laVec_1, laVec_2)))){
+        if(!(v3equality(glm::cross(glmVec_1, glmVec_2), v3d::cross(laVec_1, laVec_2)))){
             failedTests++;
         }
     }

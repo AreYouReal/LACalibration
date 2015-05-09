@@ -10,7 +10,8 @@
 
 #include "glm/glm.hpp"
 #include "glm/ext.hpp"
-#include "LA.h"
+#include "v3d.h"
+#include "m4d.h"
 
 #define rnd(max) (float)((float)(rand() % max - max/2)/ (MAX/10))
 #define MAX 100
@@ -22,8 +23,7 @@
 #define DEBUG_MODE false
 
 class TestUtils{
-#warning declare private after debugging and testing
-public:
+private:
 // Supporting functions
     static glm::vec3 glmrndvec(){
         return glm::vec3(rnd(MAX), rnd(MAX), rnd(MAX));
@@ -34,15 +34,15 @@ public:
                          rnd(MAX), rnd(MAX), rnd(MAX), rnd(MAX),
                          rnd(MAX), rnd(MAX), rnd(MAX), rnd(MAX) );
     }
-    static V3D larndvec(){
-        return V3D(rnd(MAX), rnd(MAX), rnd(MAX));
+    static v3d larndvec(){
+        return v3d(rnd(MAX), rnd(MAX), rnd(MAX));
     }
-    static V3D laVecFromglmVec(const glm::vec3 vec){
-        return V3D(vec.x, vec.y, vec.z);
+    static v3d laVecFromglmVec(const glm::vec3 vec){
+        return v3d(vec.x, vec.y, vec.z);
     }
-    static M4D laMatrix4FromglmMat4(const glm::mat4 glmm4){
+    static m4d laMatrix4FromglmMat4(const glm::mat4 glmm4){
         glm::mat4 m4 = glm::transpose(glmm4);
-        return M4D(m4[0][0], m4[0][1], m4[0][2], m4[0][3],
+        return m4d(m4[0][0], m4[0][1], m4[0][2], m4[0][3],
                         m4[1][0], m4[1][1], m4[1][2], m4[1][3],
                         m4[2][0], m4[2][1], m4[2][2], m4[2][3],
                         m4[3][0], m4[3][1], m4[3][2], m4[3][3]);
@@ -58,8 +58,8 @@ public:
             std::cout << std::endl;
         }
     }
-    static bool m4equality(const glm::mat4 glmM, const M4D origLAM){
-        M4D laM = LA::transpose(origLAM);
+    static bool m4equality(const glm::mat4 glmM, const m4d origLAM){
+        m4d laM = m4d::transpose(origLAM);
         for(int i = 0; i < glmM.length(); ++i){
             for(int j = 0; j < glmM[i].length(); ++j){
                 if(glmM[i][j] - laM.m[i][j] > SIGMA){
@@ -72,7 +72,7 @@ public:
         return true;
     }
     
-    static bool v3equality(const glm::vec3 glmVec, const V3D laVec){
+    static bool v3equality(const glm::vec3 glmVec, const v3d laVec){
         bool equal = (   glmVec[0] - laVec.v[0] < SIGMA
                       && glmVec[1] - laVec.v[1] < SIGMA
                       && glmVec[2] - laVec.v[2] < SIGMA );
@@ -82,7 +82,7 @@ public:
         return equal;
     };
 
-// M4D related tests
+// m4d related tests
     static bool lookAtTest      (int numTests);
     static bool orthoTest       (int numTests);
     static bool perspectiveTest (int numTests);
@@ -90,17 +90,17 @@ public:
     static bool rotateTest      (int numTests);
     static bool scaleTest       (int numTests);
     static bool inverseTest     (int numTests);
-    static bool M4DmultTest     (int numTests);
-    static bool M4DaddTest      (int numTests);
-    static bool M4DsubTest      (int numTests);
+    static bool m4dmultTest     (int numTests);
+    static bool m4daddTest      (int numTests);
+    static bool m4dsubTest      (int numTests);
 
-// V3D related tests
+// v3d related tests
     static bool normalizeTest   (int numTests);
     static bool lengthTest      (int numTests);
     static bool dotProductTest  (int numTests);
     static bool crossProductTest(int numTests);
     
 public:
-    static bool testV3Dfunctionality(int numTests);
-    static bool testM4Dfunctionality(int numTests);
+    static bool testv3dfunctionality(int numTests);
+    static bool testm4dfunctionality(int numTests);
 };
