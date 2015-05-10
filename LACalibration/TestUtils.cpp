@@ -281,12 +281,19 @@ bool TestUtils::crossProductTest(int numTests){
 }
 //____________________________________________________________________
 bool TestUtils::qaternionRotateVector(int numTests){
-    
-    v3d axis(1, 0, 0);
-    m4d rotationMatrix = m4d::rotate(30, axis);
-    
-            
-    
-    
+    int failedTests = 0;
+    m4d     laRMatrix;
+    q4d     rotQuaternion;
+    float   randomAngle;
+    v3d     randomAxis;
+    for(int i = 0; i < numTests; ++i){
+        randomAxis = larndvec();
+        laRMatrix = m4d::rotate(randomAngle, randomAxis);
+        rotQuaternion = q4d(randomAngle, randomAxis);
+        if(!m4laEquality(laRMatrix, rotQuaternion.matrix())){
+            failedTests++;
+        }
+    }
+    printf("Quternion <-> Rotation matrix test FINISHED. %.2f percent matching.   (NUM_TESTS = %d)(SIGMA = %f)\n", (float)(numTests - failedTests) / numTests * 100, numTests, SIGMA);
     return true;
 }

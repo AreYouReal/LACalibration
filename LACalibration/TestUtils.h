@@ -7,11 +7,12 @@
 //
 
 #pragma once
-
+#include <iostream>
 #include "glm/glm.hpp"
 #include "glm/ext.hpp"
 #include "v3d.h"
 #include "m4d.h"
+#include "q4d.h"
 
 #define rnd(max) (float)((float)(rand() % max - max/2)/ (MAX/10))
 #define MAX 100
@@ -23,7 +24,7 @@
 #define DEBUG_MODE false
 
 class TestUtils{
-private:
+public:
 // Supporting functions
     static glm::vec3 glmrndvec(){
         return glm::vec3(rnd(MAX), rnd(MAX), rnd(MAX));
@@ -65,6 +66,19 @@ private:
                 if(glmM[i][j] - laM.m[i][j] > SIGMA){
                     if(DEBUG_MODE)
                         printf("\n%f != %f        [%d][%d]\n", glmM[i][j], laM.m[i][j], i, j);
+                    return false;
+                }
+            }
+        }
+        return true;
+    }
+    
+    static bool m4laEquality(const m4d& m1, const m4d& m2){
+        for(int i = 0; i < 4; ++i){
+            for(int j = 0; j < 4; ++j){
+                if(m1.m[i][j] - m2.m[i][j] > SIGMA){
+                    if(DEBUG_MODE)
+                        printf("\n%f != %f        [%d][%d]\n", m1.m[i][j], m2.m[i][j], i, j);
                     return false;
                 }
             }

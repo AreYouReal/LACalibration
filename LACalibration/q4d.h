@@ -23,7 +23,12 @@ public:
     q4d unit();
     
     float q[4]{0.0, 0.0, 0.0, 1.0};
+    
+    
+    static void print(const q4d& quat);
 };
+
+
 
 q4d operator*(const q4d& q1, const q4d& q2);
 q4d operator*(const q4d& q1, const float scale);

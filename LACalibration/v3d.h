@@ -22,9 +22,11 @@ public:
     void operator=(const v4d& vec);
     
     float v[4]{0.0, 0.0, 0.0, 1.0};
+    
+    static void print(const v4d& vec4);
 };
 
-void print(const v4d& vec4);
+
 
 v4d operator*(const m4d& m, v4d& vec);
 
@@ -46,9 +48,11 @@ public:
     static v3d cross(const v3d& v1, const v3d& v2);
     static float length(const v3d& vec3);
     static v3d normalize(const v3d& vec);
+    
+    static void print(const v3d& vec3);
 };
 
-void print(const v3d& vec3);
+
 v3d operator*(const float scalar, const v3d& vec3);
 v3d operator*(const v3d& vec3, const float scalar);
 v3d operator+(const v3d& v1, const v3d& v2);

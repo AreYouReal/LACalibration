@@ -21,7 +21,7 @@ void v3d::operator=(const v3d& vec3){
 }
 
 // Global v3d operator definitions
-void print(const v3d& vec3){
+void v3d::print(const v3d& vec3){
     std::cout << "[ " << vec3.v[0] << ", " << vec3.v[1] << ", " << vec3.v[2] << " ]" << std::endl;
 }
 v3d operator+(const v3d& v1, const v3d& v2){
@@ -97,7 +97,7 @@ void v4d::operator=(const v4d& vec){
     v[0] = vec.v[0]; v[1] = vec.v[1]; v[2] = vec.v[2]; v[3] = vec.v[3];
 }
 
-void print(const v4d& vec4){
+void v4d::print(const v4d& vec4){
     std::cout << "[ " << vec4.v[0] << ", " << vec4.v[1] << ", " << vec4.v[2] << ", " << vec4.v[3] << " ]" << std::endl;
 }
 

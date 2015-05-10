@@ -43,7 +43,7 @@ void m4d::operator=(const m4d& m4){
     }
 }
 
-void print(const m4d& m){
+void m4d::print(const m4d& m){
     for(int i = 0; i < 4; i++){
         for(int j = 0; j < 4; j++){
             std::cout << m.m[i][j] << "  ";

@@ -47,16 +47,13 @@ q4d::q4d(const m4d& mat){
         q[k] = (mat.m[k][i] - mat.m[i][k]) * t;
     }
 }
-q4d::q4d(const float angle, float x, float y, float z){
-    v3d axis(x, y, z);
-    q4d(angle, axis);
-}
+q4d::q4d(const float angle, float x, float y, float z) : q4d(angle, v3d(x, y, z)){}
 
 
 q4d::q4d(const float angle, const v3d& vec){
     float rads      = PI / 180 * angle;
-    float imCoef    = sinf(rads);
-    float realCoef  = cosf(rads);
+    float imCoef    = sinf(rads/2);
+    float realCoef  = cosf(rads/2);
     for (int i = 0; i < 3; ++i)
         q[i] = vec.v[i] * imCoef;
     
@@ -84,9 +81,9 @@ q4d q4d::conjugate(){
 }
 
 m4d q4d::matrix(){
-    m4d quatMatrix(1 - 2 * q[1] * q[1] - 2 * q[2] * q[2], 2 * q[0] * q[1] + 2 * q[3] * q[2], 2 * q[0] * q[2] + 2 * q[3] * q[1], 0,
-                   2 * q[0] * q[1] - 2 * q[3] * q[2], 1 - 2 * q[0] * q[0] - 2 * q[2] * q[2], 2 * q[1] * q[2] + 2 * q[3] * q[0], 0,
-                   2 * q[0] * q[2] + 2 * q[3] * q[1], 2 * q[1] * q[2] - 2 * q[3] * q[0], 1 - 2 * q[0] * q[0] - 2 * q[1] * q[1], 0,
+    m4d quatMatrix(1 - 2 * q[1] * q[1] - 2 * q[2] * q[2], 2 * q[0] * q[1] - 2 * q[3] * q[2], 2 * q[0] * q[2] + 2 * q[3] * q[1], 0,
+                   2 * q[0] * q[1] + 2 * q[3] * q[2], 1 - 2 * q[0] * q[0] - 2 * q[2] * q[2], 2 * q[1] * q[2] - 2 * q[3] * q[0], 0,
+                   2 * q[0] * q[2] - 2 * q[3] * q[1], 2 * q[1] * q[2] + 2 * q[3] * q[0], 1 - 2 * q[0] * q[0] - 2 * q[1] * q[1], 0,
                    0,                                   0,                                  0,                                  1);
     return quatMatrix;
 }
@@ -100,6 +97,10 @@ q4d q4d::unit(){
     q4d unitQuternion(*this);
     unitQuternion.normalize();
     return unitQuternion;
+}
+
+void q4d::print(const q4d& q4){
+    std::cout << "[ " << q4.q[0] << ", " << q4.q[1] << ", " << q4.q[2] << ", " << q4.q[3] << " ]" << std::endl;
 }
 
 q4d operator*(const q4d& q1, const q4d& q2){

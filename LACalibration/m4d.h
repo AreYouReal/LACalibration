@@ -37,9 +37,11 @@ public:
     static m4d translate(float x, float y, float z);
     static m4d translate(v3d& translate);
     
+    static void print(const m4d& m);
+    
 };
 
-void print(const m4d& m);
+
 m4d operator*(const m4d& m1, const m4d& m2);
 m4d operator*(const float scalar, const m4d& m4);
 m4d operator*(const m4d& m4, const float scalar);
