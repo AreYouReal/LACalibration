@@ -17,7 +17,6 @@ int main(int argc, const char * argv[]){
 
     TestUtils::qaternionRotateVector(1000);
     
-
     return 0;
 }
 

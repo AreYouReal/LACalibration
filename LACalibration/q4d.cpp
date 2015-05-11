@@ -103,6 +103,10 @@ void q4d::print(const q4d& q4){
     std::cout << "[ " << q4.q[0] << ", " << q4.q[1] << ", " << q4.q[2] << ", " << q4.q[3] << " ]" << std::endl;
 }
 
+q4d q4d::lerp(const q4d &q1, const q4d &q2, float t){
+    return q4d(q1 + (q2 - q1) * t);
+}
+
 q4d operator*(const q4d& q1, const q4d& q2){
     q4d quaternion;
     quaternion.q[0] = q1.q[0] * q2.q[3] + q1.q[1] * q2.q[2] - q1.q[2] * q2.q[1] + q1.q[3] * q2.q[0];
@@ -114,6 +118,11 @@ q4d operator*(const q4d& q1, const q4d& q2){
 
 q4d operator+(const q4d& q1, const q4d& q2){
     q4d quaternion(q1.q[0] + q2.q[0], q1.q[1] + q2.q[1], q1.q[2] + q2.q[2], q1.q[3] + q2.q[3]);
+    return quaternion;
+}
+
+q4d operator-(const q4d& q1, const q4d& q2){
+    q4d quaternion(q1.q[0] - q2.q[0], q1.q[1] - q2.q[1], q1.q[2] - q2.q[2], q1.q[3] - q2.q[3]);
     return quaternion;
 }
 

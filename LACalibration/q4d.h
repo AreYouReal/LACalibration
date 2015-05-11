@@ -26,6 +26,7 @@ public:
     
     
     static void print(const q4d& quat);
+    static q4d lerp(const q4d& q1, const q4d& q2, float t);
 };
 
 
@@ -33,3 +34,4 @@ public:
 q4d operator*(const q4d& q1, const q4d& q2);
 q4d operator*(const q4d& q1, const float scale);
 q4d operator+(const q4d& q1, const q4d& q2);
+q4d operator-(const q4d& q1, const q4d& q2);;
