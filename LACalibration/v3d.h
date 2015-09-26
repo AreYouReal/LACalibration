@@ -5,7 +5,7 @@
 // TODO: Remove from release
 #include <iostream>
 
-#define PI atan(1.0f)*4.0f
+const float PI = atan(1.0f)*4.0f;
 
 
 // Forward declaration
@@ -18,10 +18,10 @@ public:
     v4d(float x, float y, float z, float w = 0.0f);
     v4d(const v3d& vec3);
     
-    float& operator[](int i);
-    void operator=(const v4d& vec);
+    float operator[](int i);
+    v4d& operator=(const v4d& vec);
     
-    float v[4]{0.0, 0.0, 0.0, 1.0};
+    float x, y, z, w;
     
     static void print(const v4d& vec4);
 };
@@ -31,18 +31,18 @@ public:
 v4d operator*(const m4d& m, v4d& vec);
 
 struct v3d{
-public:
     v3d();
     v3d(float a);
     v3d(float x, float y, float z);
     v3d(const v4d& vec);
     
-    float& operator[](int i);
-    void operator=(const v3d& vec);
+    void operator+=(const v3d& vec);
+    float operator[](int i);
+    v3d& operator=(const v3d& vec);
     
     float* pointer();
     
-    float v[3]{0.0, 0.0, 0.0};
+    float x, y, z;
 
     static float dot(const v3d& v1, const v3d& v2);
     static v3d cross(const v3d& v1, const v3d& v2);

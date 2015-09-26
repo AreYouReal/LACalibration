@@ -106,9 +106,32 @@ v4d operator*(const m4d& m, v4d& vec){
         for(int col = 0; col < 4; col++){
             result += m.m[row][col] * vec[col];
         }
-        rVec4[row] = result;
+        switch (row) {
+            case 0: rVec4.x = result; break;
+            case 1: rVec4.y = result; break;
+            case 2: rVec4.z = result; break;
+            case 3: rVec4.w = result; break;
+            default: break;
+        }
     }
     return rVec4;
+}
+
+v4d operator*(const m4d &m, const v4d &v){
+    return v4d(m.m[0][0] * v.x + m.m[0][1] * v.y + m.m[0][2] * v.z + m.m[0][3] * v.w,
+                  m.m[1][0] * v.x + m.m[1][1] * v.y + m.m[1][2] * v.z + m.m[1][3] * v.w,
+                  m.m[2][0] * v.x + m.m[2][1] * v.y + m.m[2][2] * v.z + m.m[2][3] * v.w,
+                  m.m[3][0] * v.x + m.m[3][1] * v.y + m.m[3][2] * v.z + m.m[3][3] * v.w);
+}
+
+v3d operator*(const v3d &v, const m4d &m){
+    return v3d(m.m[0][0] * v.x + m.m[0][1] * v.y + m.m[0][2] * v.z,
+               m.m[1][0] * v.x + m.m[1][1] * v.y + m.m[1][2] * v.z,
+               m.m[2][0] * v.x + m.m[2][1] * v.y + m.m[2][2] * v.z);
+}
+
+v4d operator*(const v4d &v, const m4d &m){
+    return operator*(m, v);
 }
 
 float* m4d::pointer(){
@@ -200,7 +223,7 @@ m4d m4d::perspective(float fovy, float w, float h, float n, float f){
     float A = - (f + n)/(f - n);
     float B = -(2 * f * n)/(f - n);
     float angleOfView =  PI / 180 * fovy;
-    float d = 1.0f / tanf(angleOfView/2);
+    float d = 1.0f / tanf(angleOfView * 0.5f);
     
     m4d rMat4(d/aspect, 0, 0, 0,
               0,     d, 0, 0,
@@ -213,12 +236,16 @@ m4d m4d::rotate(float angle, float x, float y, float z){
     v3d axis(x, y, z);
     return m4d::rotate(angle, axis);
 }
+m4d m4d::rotate(v3d &angles){
+    return m4d::rotate(angles.x, 1.0f, .0f, .0f) * m4d::rotate(angles.y, .0f, 1.0f, .0f) * m4d::rotate(angles.z, .0f, .0f, 1.0f);
+}
+
 m4d m4d::rotate(float angle, v3d& axis){
     float degree = PI / 180 * angle;
     v3d nAxis = v3d::normalize(axis);
-    float x = nAxis.v[0];
-    float y = nAxis.v[1];
-    float z = nAxis.v[2];
+    float x = nAxis.x;
+    float y = nAxis.y;
+    float z = nAxis.z;
     float c = cos(degree);
     float s = sin(degree);
     
@@ -234,9 +261,9 @@ m4d m4d::scale(float x, float y, float z){
     return m4d::scale(scale);
 }
 m4d m4d::scale(v3d& scale){
-    m4d rMat4(scale.v[0], 0, 0, 0,
-              0, scale.v[1], 0, 0,
-              0, 0, scale.v[2], 0,
+    m4d rMat4(scale.x, 0, 0, 0,
+              0, scale.y, 0, 0,
+              0, 0, scale.z, 0,
               0,	  0,   0,  1);
     return rMat4;
 }
@@ -245,9 +272,9 @@ m4d m4d::translate(float x, float y, float z){
     return m4d::translate(translate);
 }
 m4d m4d::translate(v3d& translate){
-    m4d rMat4(1, 0, 0, translate.v[0],
-              0, 1, 0, translate.v[1],
-              0, 0, 1, translate.v[2],
+    m4d rMat4(1, 0, 0, translate.x,
+              0, 1, 0, translate.y,
+              0, 0, 1, translate.z,
               0, 0, 0,      1);
     
     return rMat4;

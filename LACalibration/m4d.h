@@ -1,9 +1,5 @@
 #pragma once
 
-#warning remove from release
-#include <iostream>
-
-
 #include "v3d.h"
 
 struct m4d{
@@ -32,6 +28,7 @@ public:
     static m4d perspective(float fovy, float w, float h, float n, float f);
     static m4d rotate(float angle, float x, float y, float z);
     static m4d rotate(float angle, v3d& axis);
+    static m4d rotate(v3d& angles);
     static m4d scale(float x, float y, float z);
     static m4d scale(v3d& scale);
     static m4d translate(float x, float y, float z);
@@ -48,4 +45,8 @@ m4d operator*(const m4d& m4, const float scalar);
 m4d operator/(const m4d& m4, const float scalar);
 m4d operator+(const m4d& m1, const m4d& m2);
 m4d operator-(const m4d& m1, const m4d& m2);
+v4d operator*(const m4d& m, const v4d &v);
+v4d operator*(const v4d& v, const m4d &m);
+v3d operator*(const v3d& v, const m4d &m);
+
 

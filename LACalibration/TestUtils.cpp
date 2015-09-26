@@ -288,8 +288,12 @@ bool TestUtils::qaternionRotateVector(int numTests){
     v3d     randomAxis;
     for(int i = 0; i < numTests; ++i){
         randomAxis = larndvec();
+        randomAngle = rnd(360);
         laRMatrix = m4d::rotate(randomAngle, randomAxis);
         rotQuaternion = q4d(randomAngle, randomAxis);
+        
+        laRMatrix = laRMatrix * rotQuaternion.matrix();
+        rotQuaternion *= rotQuaternion;
         if(!m4laEquality(laRMatrix, rotQuaternion.matrix())){
             failedTests++;
         }

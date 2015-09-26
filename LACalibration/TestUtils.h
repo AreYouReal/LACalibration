@@ -87,11 +87,11 @@ public:
     }
     
     static bool v3equality(const glm::vec3 glmVec, const v3d laVec){
-        bool equal = (   glmVec[0] - laVec.v[0] < SIGMA
-                      && glmVec[1] - laVec.v[1] < SIGMA
-                      && glmVec[2] - laVec.v[2] < SIGMA );
+        bool equal = (   glmVec.x - laVec.x < SIGMA
+                      && glmVec.y - laVec.y < SIGMA
+                      && glmVec.z - laVec.z < SIGMA );
         if(!equal && DEBUG_MODE){
-            printf("v3equality failed [ %f, %f, %f ] & [ %f, %f, %f ]", glmVec[0], glmVec[1], glmVec[2], laVec.v[0], laVec.v[1], laVec.v[2]);
+            printf("v3equality failed [ %f, %f, %f ] & [ %f, %f, %f ]", glmVec.x, glmVec.y, glmVec.z, laVec.x, laVec.y, laVec.z);
         }
         return equal;
     };
