@@ -17,7 +17,7 @@ public:
     v4d();
     v4d(float x, float y, float z, float w = 0.0f);
     v4d(const v4d& v);
-//    v4d(const v3d& vec3);
+    v4d(const v3d& vec3);
     v4d(const v3d& vec3, const float w);
     
     const float& operator[](int i);
