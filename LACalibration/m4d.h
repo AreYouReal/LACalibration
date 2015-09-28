@@ -7,16 +7,16 @@ public:
     m4d();
     m4d(const m4d& m4);
     m4d(const float arr[16]);
-    m4d(float m11, float m12, float m13, float m14,
-        float m21, float m22, float m23, float m24,
-        float m31, float m32, float m33, float m34,
-        float m41, float m42, float m43, float m44);
+    m4d(const float m00, const float m01, const float m02, const float m03,
+        const float m10, const float m11, const float m12, const float m13,
+        const float m20, const float m21, const float m22, const float m23,
+        const float m30, const float m31, const float m32, const float m33);
     
     void operator=(const m4d& m4);
     float* pointer();
     
     
-    float m[4][4];
+    v4d m[4];
     
     static float determinant(const m4d& m4);
     static m4d transpose(const m4d& m4);

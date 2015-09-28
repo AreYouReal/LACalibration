@@ -12,8 +12,8 @@
 int main(int argc, const char * argv[]){
 
     srand(time(0));    
-//    TestUtils::testm4dfunctionality(10000);
-//    TestUtils::testv3dfunctionality(10000);
+    TestUtils::testm4dfunctionality(10000);
+    TestUtils::testv3dfunctionality(10000);
 
     TestUtils::qaternionRotateVector(1000);
     

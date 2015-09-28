@@ -76,9 +76,17 @@ public:
     static bool m4laEquality(const m4d& m1, const m4d& m2){
         for(int i = 0; i < 4; ++i){
             for(int j = 0; j < 4; ++j){
-                if(m1.m[i][j] - m2.m[i][j] > SIGMA){
+                float temp1, temp2;
+                switch (j) {
+                    case 0: temp1 = m1.m[i].x; temp2 = m2.m[i].x; break;
+                    case 1: temp1 = m1.m[i].y; temp2 = m2.m[i].y; break;
+                    case 2: temp1 = m1.m[i].z; temp2 = m2.m[i].z; break;
+                    case 3: temp1 = m1.m[i].w; temp2 = m2.m[i].w; break;
+                    default: break;
+                }
+                if(temp1 - temp2 > SIGMA){
                     if(DEBUG_MODE)
-                        printf("\n%f != %f        [%d][%d]\n", m1.m[i][j], m2.m[i][j], i, j);
+                        printf("\n%f != %f        [%d][%d]\n", temp1, temp2, i, j);
                     return false;
                 }
             }
